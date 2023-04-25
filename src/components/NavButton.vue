@@ -1,24 +1,18 @@
-
-
 <script setup lang="ts">
-  import { RouterLink } from 'vue-router'
+import { RouterLink } from 'vue-router'
 
-  interface NavButtonProps {
-    path: string
-  }
+interface NavButtonProps {
+  path: string
+}
 
-  const props = defineProps<NavButtonProps>()
-
-  console.log(props)
+const props = defineProps<NavButtonProps>()
 
 </script>
 
 <template>
   <RouterLink :to="props.path">
-    <span>
+    <span class="w-16 h-16 rounded-lg flex items-center justify-center bg-neutral-800">
       <slot></slot>
     </span>
   </RouterLink>
 </template>
-
-
