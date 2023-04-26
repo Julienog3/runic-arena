@@ -49,21 +49,25 @@ export default {
 </script>
 
 <template>
-  <nav class="w-28 h-screen p-12 bg-neutral-900 flex flex-col gap-6 items-center">
-    <NavButton 
-      v-for="route in routes" 
-      :key="route.name" 
-      :path="route.path"
-    >
-      <font-awesome-icon 
-      :class="(isRouteSelected(route.name)) ?
-        'text-3xl text-purple-500' :
-        'text-3xl text-neutral-500'
-      " 
-      :icon="`fa-solid ${route.icon}`" />
-      <span v-if="isRouteSelected(route.name)" class="bg-purple-500 w-2 h-8 rounded-e-lg absolute left-0">
-      </span>
-    </NavButton>
+  <nav class="w-28 h-screen p-12 bg-neutral-900 flex flex-col items-center justify-between">
+    <span class="w-12 h-12 rounded-full bg-gradient-to-r from-purple-500 to-yellow-100"></span>
+    <div class="flex flex-col gap-4">
+      <NavButton 
+        v-for="route in routes" 
+        :key="route.name" 
+        :path="route.path"
+      >
+        <font-awesome-icon 
+        :class="(isRouteSelected(route.name)) ?
+            'text-3xl text-purple-500' :
+            'text-3xl text-neutral-500'
+          " 
+        :icon="`fa-solid ${route.icon}`" />
+        <span v-if="isRouteSelected(route.name)" class="bg-purple-500 w-2 h-8 rounded-e-lg absolute left-0">
+        </span>
+      </NavButton>
+    </div>
+    <span class="text-neutral-500 text-sm text-center">© 2023 Studio Goblins</span>
   </nav>
 </template>
 
