@@ -73,9 +73,11 @@
         >
           <td scope="col" class="px-6 py-4">{{ card.name }}</td>
           <td scope="col" class="px-6 py-4">
-            <AppChip>{{ card.type }}</AppChip>
+            <AppChip color="purple">{{ card.type }}</AppChip>
           </td>
-          <td scope="col" class="px-6 py-4">{{ card.class }}</td>
+          <td scope="col" class="px-6 py-4">
+            <AppChip color="sky">{{ card.class }}</AppChip>
+          </td>
         </tr>
       </tbody>
     </table>

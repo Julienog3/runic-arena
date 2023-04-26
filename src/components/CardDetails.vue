@@ -1,6 +1,11 @@
 <script lang="ts">
   import AppChip from '@/components/AppChip.vue'
-  import { reactive } from 'vue';
+  import { computed, reactive } from 'vue';
+
+  enum SkillCategoryEnum {
+    ACTIVES = 'actives',
+    PASSIVE = 'passive'
+  }
 
   export default {
     components: {
@@ -18,10 +23,14 @@
         },
       ]
 
+      const currentSkills = computed(() => {
+        return state.skills[state.selectedSkillCategory]
+      })
+
       const state = reactive({
-        selectedSkillCategory: 'actives',
+        selectedSkillCategory: SkillCategoryEnum.ACTIVES,
         skills: {
-          actives: [
+          [SkillCategoryEnum.ACTIVES]: [
             {
               name: 'Critique',
               description: 'Double les dommages des X prochaines attaques'
@@ -31,7 +40,7 @@
               description: 'Divise par 2 les dommages des X prochaines attaques de l\'adversaire'
             },
           ],
-          passive: [
+          [SkillCategoryEnum.PASSIVE]: [
             {
               name: 'Attaque',
               description: 'Si la carte engage le duel, la compétence est déclenchée'
@@ -42,7 +51,7 @@
 
       const isCategorySelected = (route: string) => route === state.selectedSkillCategory
 
-      return { state, skillCategories, isCategorySelected }
+      return { state, skillCategories, isCategorySelected, currentSkills }
     } 
   }
 </script>
@@ -71,11 +80,11 @@
         <div class="flex gap-8">
           <div class="flex flex-col gap-2">
             <h4 class="text-lg font-semibold text-neutral-500">Type</h4>
-            <AppChip>Chaos</AppChip>
+            <AppChip color="purple">Chaos</AppChip>
           </div>
           <div class="flex flex-col gap-2">
             <h4 class="text-lg font-semibold text-neutral-500">Classe</h4>
-            <AppChip>Mage</AppChip>
+            <AppChip color="sky">Mage</AppChip>
           </div>
         </div>
         <p class=" text-neutral-500">
@@ -86,14 +95,14 @@
 
     <div class="">
       <ul class="border-b flex gap-4 pb-2 mb-4">
-        <li @click="state.selectedSkillCategory = skill.name" v-for="skill in skillCategories" :key="skill.name" :class="isCategorySelected(skill.name) ? 'relative cursor-pointer text-purple-500' : 'relative cursor-pointer text-neutral-900'">
+        <li @click="state.selectedSkillCategory = skill.name as SkillCategoryEnum" v-for="skill in skillCategories" :key="skill.name" :class="isCategorySelected(skill.name) ? 'relative cursor-pointer text-purple-500' : 'relative cursor-pointer text-neutral-900'">
           {{ skill.label }}
           <span v-if="isCategorySelected(skill.name)" class="absolute bg-purple-500 w-full h-[2px] bottom-0 left-0 translate-y-[9px]"></span>
         </li>
       </ul>
       <ul class="flex flex-col gap-4">
         <li 
-          v-for="skill in state.skills[state.selectedSkillCategory]" :key="skill.name"
+          v-for="skill in currentSkills" :key="skill.name"
           class="bg-neutral-200 w-full h-24 rounded-lg flex flex-col py-3 px-6 justify-center"
         >
           <h4 class="font-bold text-lg">{{ skill.name }}</h4>
