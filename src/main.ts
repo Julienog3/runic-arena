@@ -2,11 +2,8 @@ import { createApp } from 'vue'
 import { createPinia } from 'pinia'
 import { library } from '@fortawesome/fontawesome-svg-core'
 
-import { faHouse, faPlus, faGear } from '@fortawesome/free-solid-svg-icons'
+import { faHouse, faPlus, faGear, faPen, faTrash } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-
-
-
 
 import App from './App.vue'
 import router from './router'
@@ -17,6 +14,8 @@ import './assets/main.css'
 library.add(faHouse)
 library.add(faPlus)
 library.add(faGear)
+library.add(faPen)
+library.add(faTrash)
 
 createApp(App)
   .use(createPinia())

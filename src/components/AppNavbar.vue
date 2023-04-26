@@ -2,7 +2,7 @@
 import { useRoute } from 'vue-router'
 
 import NavButton from './NavButton.vue'
-import { computed, onUpdated, reactive, watch } from 'vue'
+import { computed, reactive, watch } from 'vue'
 
 export default {
   components: {
