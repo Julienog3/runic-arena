@@ -1,5 +1,6 @@
 <script lang="ts">
   import AppChip from '@/components/AppChip.vue'
+  import ConfirmationModal from './modals/ConfirmationModal.vue';
   import { computed, reactive } from 'vue';
 
   enum SkillCategoryEnum {
@@ -9,7 +10,8 @@
 
   export default {
     components: {
-      AppChip
+      AppChip,
+      ConfirmationModal,
     },
     setup() {
       const skillCategories = [
@@ -28,6 +30,7 @@
       })
 
       const state = reactive({
+        isModalOpened: false,
         selectedSkillCategory: SkillCategoryEnum.ACTIVES,
         skills: {
           [SkillCategoryEnum.ACTIVES]: [
@@ -57,6 +60,11 @@
 </script>
 
 <template>
+  <ConfirmationModal 
+    v-if="state.isModalOpened"
+    title="Confirmation de la suppression"
+    :close-modal="() => state.isModalOpened = false"
+  />
   <aside class="w-4/6 border-l p-8">
     <div class="flex justify-between mb-8">
       <h3 class="font-bold text-4xl text-neutral-900">Souris sorcière</h3>
@@ -64,18 +72,21 @@
         <button class="w-12 h-12 rounded-lg bg-neutral-300">
           <font-awesome-icon class="text-neutral-900" icon="fa-solid fa-pen" />
         </button>
-        <button class="w-12 h-12 rounded-lg bg-red-300">
+        <button @click="state.isModalOpened = true" class="w-12 h-12 rounded-lg bg-red-300">
           <font-awesome-icon class="text-red-500" icon="fa-solid fa-trash" />
         </button>
       </div>
     </div>
 
-    <div class="flex gap-8 mb-6">
-      <img 
-        class="w-48 rounded-lg"
-        src="@/assets/sample-card.jpg"
-        alt=""
-      >
+    <div class="flex gap-8 mb-12">
+      <div class="relative w-full">
+        <img 
+          class="rounded-lg"
+          src="@/assets/sample-card.jpg"
+          alt=""
+        >
+        <span class="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 w-12 h-12 rounded-full flex items-center justify-center text-orange-500 bg-orange-200 text-lg font-semibold">46</span>
+      </div>
       <div class="flex flex-col gap-4">
         <div class="flex gap-8">
           <div class="flex flex-col gap-2">

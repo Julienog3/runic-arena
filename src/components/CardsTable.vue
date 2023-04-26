@@ -19,7 +19,7 @@
           class: 'Magicien'
         },
         {
-          name: 'Souris',
+          name: 'Souris de combat',
           type: 'Chaos',
           class: 'Magicien'
         },
@@ -73,7 +73,7 @@
         >
           <td scope="col" class="px-6 py-4">{{ card.name }}</td>
           <td scope="col" class="px-6 py-4">
-            <AppChip color="purple">{{ card.type }}</AppChip>
+            <AppChip color="yellow">{{ card.type }}</AppChip>
           </td>
           <td scope="col" class="px-6 py-4">
             <AppChip color="sky">{{ card.class }}</AppChip>

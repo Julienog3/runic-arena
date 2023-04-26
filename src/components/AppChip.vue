@@ -5,7 +5,8 @@ import { computed } from 'vue';
     NEUTRAL = 'neutral',
     PURPLE = 'purple',
     SKY = 'sky',
-    RED= 'red'
+    RED = 'red',
+    YELLOW = 'yellow'
   }
 
   interface ChipProps {
@@ -19,6 +20,8 @@ import { computed } from 'vue';
     [ColorEnum.PURPLE]: "bg-purple-200 text-purple-500",
     [ColorEnum.SKY]: "bg-sky-200 text-sky-500",
     [ColorEnum.RED]: "bg-red-200 text-red-500",
+    [ColorEnum.YELLOW]: "bg-yellow-100 text-yellow-500",
+    
   }
 
   const getColor = computed(() => colors[props.color])
