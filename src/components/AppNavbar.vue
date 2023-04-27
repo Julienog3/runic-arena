@@ -12,16 +12,19 @@ export default {
     const routes = [
       {
         name: 'home',
+        label: 'Liste des cartes',
         path: '/',
-        icon: 'fa-house',
+        icon: 'fa-people-group',
       },
       {
         name: 'adding',
+        label: 'Liste des capacités',
         path: '/adding',
-        icon: 'fa-plus',
+        icon: 'fa-fire',
       },
       {
         name: 'settings',
+        label: 'Paramètres',
         path: '/settings',
         icon: 'fa-gear',
       },
@@ -56,6 +59,7 @@ export default {
         v-for="route in routes" 
         :key="route.name" 
         :path="route.path"
+        :label="route.label"
       >
         <font-awesome-icon 
         :class="(isRouteSelected(route.name)) ?
@@ -63,8 +67,7 @@ export default {
             'text-3xl text-neutral-500'
           " 
         :icon="`fa-solid ${route.icon}`" />
-        <span v-if="isRouteSelected(route.name)" class="bg-purple-500 w-2 h-8 rounded-e-lg absolute left-0">
-        </span>
+        <span v-if="isRouteSelected(route.name)" class="bg-purple-500 w-2 h-8 rounded-e-lg absolute left-0 -translate-x-6" />
       </NavButton>
     </div>
     <span class="text-neutral-500 text-sm text-center">© 2023 Studio Goblins</span>
