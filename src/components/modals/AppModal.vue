@@ -5,6 +5,7 @@ interface ModalProps {
 }
 
 defineProps<ModalProps>()
+
 </script>
 
 <template>

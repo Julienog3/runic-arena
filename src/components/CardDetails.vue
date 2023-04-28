@@ -1,69 +1,32 @@
-<script lang="ts">
+<script setup lang="ts">
   import AppChip from '@/components/utils/AppChip.vue'
   import AppButton from '@/components/utils/AppButton.vue'
   import ConfirmationModal from './modals/ConfirmationModal.vue';
-  import { computed, reactive } from 'vue';
-  import SkillList from './SkillList.vue';
+  import { ref } from 'vue';
+  import CardDetailsSkillList from './CardDetailsSkillList.vue';
+  import type { CardType } from '@/types/card';
 
-  export enum SkillCategoryEnum {
-    ACTIVES = 'actives',
-    PASSIVE = 'passive'
+  interface CardDetailsProps {
+    card: CardType
   }
 
-  export default {
-    components: {
-      AppChip,
-      AppButton,
-      ConfirmationModal,
-      SkillList
-    },
-    setup() {
-      const currentSkills = computed(() => {
-        return state.skills[state.selectedSkillCategory]
-      })
+  const props = defineProps<CardDetailsProps>()
 
-      const state = reactive({
-        isModalOpened: false,
-        selectedSkillCategory: SkillCategoryEnum.ACTIVES,
-        skills: {
-          [SkillCategoryEnum.ACTIVES]: [
-            {
-              name: 'Critique',
-              description: 'Double les dommages des X prochaines attaques'
-            },
-            {
-              name: 'Malédiction',
-              description: 'Divise par 2 les dommages des X prochaines attaques de l\'adversaire'
-            },
-          ],
-          [SkillCategoryEnum.PASSIVE]: [
-            {
-              name: 'Attaque',
-              description: 'Si la carte engage le duel, la compétence est déclenchée'
-            }
-          ]
-        }
-      })
-
-      const isCategorySelected = (route: string) => route === state.selectedSkillCategory
-
-      return { state, isCategorySelected, currentSkills }
-    } 
-  }
+  const isModalOpened = ref(false)
 </script>
 
 <template>
   <ConfirmationModal 
-    v-show="state.isModalOpened"
+    v-show="isModalOpened"
     title="Confirmation de la suppression"
-    :close-modal="() => state.isModalOpened = false"
+    :close-modal="() => isModalOpened = false"
   />
   <aside class="w-4/6 border-l p-8">
     <div class="flex justify-between mb-8">
-      <h3 class="font-bold text-4xl text-neutral-900">Souris sorcière</h3>
+      <h3 class="font-bold text-4xl text-neutral-900">{{ props.card.name }}</h3>
       <div class="flex gap-4">
-        <AppButton :on-click="() => state.isModalOpened = true" color="neutral" icon="fa-pen"/>
-        <AppButton :on-click="() => state.isModalOpened = true" color="red" icon="fa-trash"/>
+        <AppButton :on-click="() => isModalOpened = true" color="neutral" icon="fa-pen"/>
+        <AppButton :on-click="() => isModalOpened = true" color="red" icon="fa-trash"/>
       </div>
     </div>
 
@@ -80,19 +43,19 @@
         <div class="flex gap-8">
           <div class="flex flex-col gap-2">
             <h4 class="text-lg font-semibold text-neutral-500">Type</h4>
-            <AppChip color="purple">Chaos</AppChip>
+            <AppChip color="purple">{{ $t(`card.types.${props.card.type}`) }}</AppChip>
           </div>
           <div class="flex flex-col gap-2">
             <h4 class="text-lg font-semibold text-neutral-500">Classe</h4>
-            <AppChip color="sky">Mage</AppChip>
+            <AppChip color="sky">{{ $t(`card.categories.${props.card.category}`) }}</AppChip>
           </div>
         </div>
         <p class=" text-neutral-500">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum odio qui iusto alias fugit necessitatibus accusantium asperiores ab dicta assumenda.
+          {{ props.card.description }}
         </p>
       </div>
     </div>
-    <SkillList :skills="state.skills" />
+    <CardDetailsSkillList :skills="props.card.skills" />
   </aside>
 </template>
 

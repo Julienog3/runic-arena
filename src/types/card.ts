@@ -1,3 +1,5 @@
+import type { SkillType } from "./skill"
+
 export enum TypeEnum {
   CHAOS = 'chaos',
   HALO = 'halo'
@@ -13,6 +15,8 @@ export enum CategoryEnum {
 
 export type CardType = {
   name: string
+  description?: string
   type: TypeEnum 
   category: CategoryEnum
+  skills: SkillType[] 
 }

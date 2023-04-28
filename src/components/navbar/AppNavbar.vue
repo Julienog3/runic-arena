@@ -17,9 +17,9 @@ export default {
         icon: 'fa-people-group',
       },
       {
-        name: 'adding',
+        name: 'skills',
         label: 'Liste des capacités',
-        path: '/adding',
+        path: '/skills',
         icon: 'fa-fire',
       },
       {

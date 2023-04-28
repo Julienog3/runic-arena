@@ -1,13 +1,6 @@
 <script setup lang="ts">
-import { computed } from 'vue';
-
-  enum ColorEnum {
-    NEUTRAL = 'neutral',
-    PURPLE = 'purple',
-    SKY = 'sky',
-    RED = 'red',
-    YELLOW = 'yellow'
-  }
+  import { ColorEnum } from '@/types/color';
+  import { computed } from 'vue';
 
   interface ChipProps {
     color: ColorEnum

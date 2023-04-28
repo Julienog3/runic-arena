@@ -1,4 +1,10 @@
 {
+  "globals": {
+    "name": "Nom",
+    "type": "Type",
+    "category": "Classe",
+    "title": "Runic arena"
+  },
   "card": {
     "types": {
       "halo": "Halo",
@@ -11,5 +17,8 @@
       "warrior": "Guerrier",
       "rogue": "Assassin"
     }
+  },
+  "home": {
+    "title": "Liste des cartes"
   }
 }

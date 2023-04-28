@@ -1,0 +1,142 @@
+{
+  "cards": [
+    {
+      "name": "Souris de combat",
+      "type": "halo",
+      "category": "rogue",
+      "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum odio qui iusto alias fugit necessitatibus accusantium asperiores ab dicta assumenda.",
+      "skills": [
+        {
+          "name": "Critique",
+          "description": "Double les dommages des X prochaines attaques",
+          "type": "active"
+        },
+        {
+          "name": "Malédiction",
+          "description": "Divise par 2 les dommages des X prochaines attaques de l'adversaire",
+          "type": "active"
+        },
+        {
+          "name": "Attaque",
+          "description": "Si la carte engage le duel, la compétence est déclenchée",
+          "type": "passive"
+        }
+      ]
+    },
+    {
+      "name": "Souris des plaines",
+      "type": "halo",
+      "category": "rogue",
+      "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum odio qui iusto alias fugit necessitatibus accusantium asperiores ab dicta assumenda.",
+      "skills": [
+        {
+          "name": "Critique",
+          "description": "Double les dommages des X prochaines attaques",
+          "type": "active"
+        },
+        {
+          "name": "Malédiction",
+          "description": "Divise par 2 les dommages des X prochaines attaques de l'adversaire",
+          "type": "active"
+        },
+        {
+          "name": "Attaque",
+          "description": "Si la carte engage le duel, la compétence est déclenchée",
+          "type": "passive"
+        }
+      ]
+    },
+    {
+      "name": "Souris de la rue",
+      "type": "halo",
+      "category": "rogue",
+      "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum odio qui iusto alias fugit necessitatibus accusantium asperiores ab dicta assumenda.",
+      "skills": [
+        {
+          "name": "Critique",
+          "description": "Double les dommages des X prochaines attaques",
+          "type": "active"
+        },
+        {
+          "name": "Malédiction",
+          "description": "Divise par 2 les dommages des X prochaines attaques de l'adversaire",
+          "type": "active"
+        },
+        {
+          "name": "Attaque",
+          "description": "Si la carte engage le duel, la compétence est déclenchée",
+          "type": "passive"
+        }
+      ]
+    },
+    {
+      "name": "Souris de combat",
+      "type": "halo",
+      "category": "rogue",
+      "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum odio qui iusto alias fugit necessitatibus accusantium asperiores ab dicta assumenda.",
+      "skills": [
+        {
+          "name": "Critique",
+          "description": "Double les dommages des X prochaines attaques",
+          "type": "active"
+        },
+        {
+          "name": "Malédiction",
+          "description": "Divise par 2 les dommages des X prochaines attaques de l'adversaire",
+          "type": "active"
+        },
+        {
+          "name": "Attaque",
+          "description": "Si la carte engage le duel, la compétence est déclenchée",
+          "type": "passive"
+        }
+      ]
+    },
+    {
+      "name": "Souris de combat",
+      "type": "halo",
+      "category": "rogue",
+      "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum odio qui iusto alias fugit necessitatibus accusantium asperiores ab dicta assumenda.",
+      "skills": [
+        {
+          "name": "Critique",
+          "description": "Double les dommages des X prochaines attaques",
+          "type": "active"
+        },
+        {
+          "name": "Malédiction",
+          "description": "Divise par 2 les dommages des X prochaines attaques de l'adversaire",
+          "type": "active"
+        },
+        {
+          "name": "Attaque",
+          "description": "Si la carte engage le duel, la compétence est déclenchée",
+          "type": "passive"
+        }
+      ]
+    },
+    {
+      "name": "Souris de combat",
+      "type": "halo",
+      "category": "rogue",
+      "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum odio qui iusto alias fugit necessitatibus accusantium asperiores ab dicta assumenda.",
+      "skills": [
+        {
+          "name": "Critique",
+          "description": "Double les dommages des X prochaines attaques",
+          "type": "active"
+        },
+        {
+          "name": "Malédiction",
+          "description": "Divise par 2 les dommages des X prochaines attaques de l'adversaire",
+          "type": "active"
+        },
+        {
+          "name": "Attaque",
+          "description": "Si la carte engage le duel, la compétence est déclenchée",
+          "type": "passive"
+        }
+      ]
+    }
+  ]
+}

@@ -1,9 +1,9 @@
-enum UnitEnum {
+export enum SkillUnitEnum {
   PERCENT = 'percent',
   FLAT = 'flat',
 }
 
-enum TypeEnum {
+export enum SkillTypeEnum {
   ACTIVE = 'active',
   PASSIVE = 'passive',
 }
@@ -12,6 +12,6 @@ export type SkillType = {
   name: string
   description: string
   value?: number
-  valueUnit?: UnitEnum
-  type?: TypeEnum
+  valueUnit?: SkillUnitEnum
+  type?: SkillTypeEnum
 }

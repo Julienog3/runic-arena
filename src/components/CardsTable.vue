@@ -1,43 +1,27 @@
-<script lang="ts">
+<script setup lang="ts">
   import AppChip from '@/components/utils/AppChip.vue'
-  import { TypeEnum, CategoryEnum, type CardType } from './../types/card.d.ts';
+  import { TypeEnum, type CardType } from '@/types/card';
+  import { ColorEnum } from '@/types/color';
 
-  export default {
-    components: {
-      AppChip
-    },
-    setup() {
-      const cards: CardType[] = [
-        {
-          name: 'Souris',
-          type: TypeEnum.CHAOS,
-          category: CategoryEnum.ARCHER
-        },
-        {
-          name: 'Souris',
-          type: TypeEnum.CHAOS,
-          category: CategoryEnum.HEALER
-        },
-        {
-          name: 'Souris de combat',
-          type: TypeEnum.HALO,
-          category: CategoryEnum.ROGUE
-        },
-        {
-          name: 'Souris',
-          type: TypeEnum.CHAOS,
-          category: CategoryEnum.WARRIOR
-        },
-        {
-          name: 'Souris',
-          type: TypeEnum.HALO,
-          category: CategoryEnum.WIZARD
-        },
-      ]
-
-      return { cards }
-    }
+  interface CardTableProps {
+    cards: CardType[]
+    onSelect: (card: CardType) => void
   }
+
+  const props = defineProps<CardTableProps>()
+
+  const getColorByType = (type: TypeEnum): ColorEnum => {
+    if (type === TypeEnum.CHAOS) {
+      return ColorEnum.PURPLE
+    }
+
+    if (type === TypeEnum.HALO) {
+      return ColorEnum.YELLOW
+    }
+
+    return ColorEnum.NEUTRAL
+  }
+
 </script>
 
 <template>
@@ -45,20 +29,21 @@
     <table class="relative text-left h-full w-full">
       <thead class="sticky top-0 left-0 bg-neutral-800">
         <tr class="text-white ">
-          <th scope="col" class="px-6 py-4 font-normal">Nom</th>
-          <th scope="col" class="px-6 py-4 font-normal">Type</th>
-          <th scope="col" class="px-6 py-4 font-normal">Classe</th>
+          <th scope="col" class="px-6 py-4 font-normal">{{ $t(`globals.name`) }}</th>
+          <th scope="col" class="px-6 py-4 font-normal">{{ $t(`globals.type`) }}</th>
+          <th scope="col" class="px-6 py-4 font-normal">{{ $t(`globals.category`) }}</th>
         </tr>
       </thead>
       <tbody>
         <tr 
-          v-for="(card, index) in cards" 
+          v-for="(card, index) in props.cards" 
           :key="index"
-          class="border-b"
+          class="border-b cursor-pointer"
+          @click="onSelect(card)"
         >
           <td scope="col" class="px-6 py-4">{{ card.name }}</td>
           <td scope="col" class="px-6 py-4">
-            <AppChip color="yellow">{{ $t(`card.types.${card.type}`) }}</AppChip>
+            <AppChip :color="getColorByType(card.type)">{{ $t(`card.types.${card.type}`) }}</AppChip>
           </td>
           <td scope="col" class="px-6 py-4">
             <AppChip color="sky">{{ $t(`card.categories.${card.category}`) }}</AppChip>
