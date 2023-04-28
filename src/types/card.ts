@@ -16,6 +16,7 @@ export enum CategoryEnum {
 export type CardType = {
   name: string
   description?: string
+  power: number
   type: TypeEnum 
   category: CategoryEnum
   skills: SkillType[] 

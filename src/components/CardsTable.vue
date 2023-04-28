@@ -29,13 +29,13 @@ import { toRaw } from 'vue';
 </script>
 
 <template>
-  <div class="app-table relative h-[500px] border rounded-xl overflow-y-scroll">
+  <div class="app-table relative h-[500px] border rounded-xl overflow-y-scroll bg-white">
     <table class="relative text-left h-full w-full">
       <thead class="sticky top-0 left-0 bg-neutral-800">
         <tr class="text-white ">
-          <th scope="col" class="px-6 py-4 font-normal">{{ $t(`globals.name`) }}</th>
-          <th scope="col" class="px-6 py-4 font-normal">{{ $t(`globals.type`) }}</th>
-          <th scope="col" class="px-6 py-4 font-normal">{{ $t(`globals.category`) }}</th>
+          <th scope="col" class="px-6 py-4 font-medium">{{ $t(`globals.name`) }}</th>
+          <th scope="col" class="px-6 py-4 font-medium">{{ $t(`globals.type`) }}</th>
+          <th scope="col" class="px-6 py-4 font-medium">{{ $t(`globals.category`) }}</th>
         </tr>
       </thead>
       <tbody>

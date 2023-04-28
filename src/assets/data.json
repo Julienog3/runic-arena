@@ -3,6 +3,7 @@
     {
       "name": "Souris de combat",
       "type": "halo",
+      "power": 69,
       "category": "rogue",
       "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum odio qui iusto alias fugit necessitatibus accusantium asperiores ab dicta assumenda.",
       "skills": [
@@ -26,6 +27,7 @@
     {
       "name": "Souris des plaines",
       "type": "halo",
+      "power": 43,
       "category": "rogue",
       "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum odio qui iusto alias fugit necessitatibus accusantium asperiores ab dicta assumenda.",
       "skills": [
@@ -49,6 +51,7 @@
     {
       "name": "Souris de la rue",
       "type": "halo",
+      "power": 37,
       "category": "rogue",
       "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum odio qui iusto alias fugit necessitatibus accusantium asperiores ab dicta assumenda.",
       "skills": [
@@ -72,6 +75,7 @@
     {
       "name": "Souris de combat",
       "type": "halo",
+      "power": 26,
       "category": "rogue",
       "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum odio qui iusto alias fugit necessitatibus accusantium asperiores ab dicta assumenda.",
       "skills": [
@@ -95,6 +99,7 @@
     {
       "name": "Souris de combat",
       "type": "halo",
+      "power": 79,
       "category": "rogue",
       "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum odio qui iusto alias fugit necessitatibus accusantium asperiores ab dicta assumenda.",
       "skills": [
@@ -118,6 +123,7 @@
     {
       "name": "Souris de combat",
       "type": "halo",
+      "power": 11,
       "category": "rogue",
       "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum odio qui iusto alias fugit necessitatibus accusantium asperiores ab dicta assumenda.",
       "skills": [

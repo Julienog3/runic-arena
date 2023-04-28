@@ -21,7 +21,7 @@
     title="Confirmation de la suppression"
     :close-modal="() => isModalOpened = false"
   />
-  <aside class="w-4/6 border-l p-8">
+  <aside class="w-4/6 border-l p-8 bg-white">
     <div class="flex justify-between mb-8">
       <h3 class="font-bold text-4xl text-neutral-900">{{ props.card.name }}</h3>
       <div class="flex gap-4">
@@ -37,16 +37,18 @@
           src="@/assets/sample-card.jpg"
           alt=""
         >
-        <span class="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 w-12 h-12 rounded-full flex items-center justify-center text-orange-500 bg-orange-200 text-lg font-semibold">46</span>
+        <span class="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 w-12 h-12 rounded-full flex items-center justify-center text-orange-500 bg-orange-200 text-lg font-semibold">
+          {{ props.card.power }}
+        </span>
       </div>
       <div class="flex flex-col gap-4">
         <div class="flex gap-8">
           <div class="flex flex-col gap-2">
-            <h4 class="text-lg font-semibold text-neutral-500">Type</h4>
+            <h4 class="text-lg font-semibold text-neutral-500">{{ $t('globals.type') }}</h4>
             <AppChip color="purple">{{ $t(`card.types.${props.card.type}`) }}</AppChip>
           </div>
           <div class="flex flex-col gap-2">
-            <h4 class="text-lg font-semibold text-neutral-500">Classe</h4>
+            <h4 class="text-lg font-semibold text-neutral-500">{{ $t('globals.category') }}</h4>
             <AppChip color="sky">{{ $t(`card.categories.${props.card.category}`) }}</AppChip>
           </div>
         </div>
