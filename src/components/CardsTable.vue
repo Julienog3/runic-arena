@@ -1,53 +1,38 @@
-
 <script lang="ts">
-  import AppChip from '@/components/AppChip.vue'
+  import AppChip from '@/components/utils/AppChip.vue'
+  import { TypeEnum, CategoryEnum, type CardType } from './../types/card.d.ts';
 
   export default {
     components: {
       AppChip
     },
     setup() {
-      const cards = [
+      const cards: CardType[] = [
         {
           name: 'Souris',
-          type: 'Chaos',
-          class: 'Magicien'
+          type: TypeEnum.CHAOS,
+          category: CategoryEnum.ARCHER
         },
         {
           name: 'Souris',
-          type: 'Chaos',
-          class: 'Magicien'
+          type: TypeEnum.CHAOS,
+          category: CategoryEnum.HEALER
         },
         {
           name: 'Souris de combat',
-          type: 'Chaos',
-          class: 'Magicien'
+          type: TypeEnum.HALO,
+          category: CategoryEnum.ROGUE
         },
         {
           name: 'Souris',
-          type: 'Chaos',
-          class: 'Magicien'
+          type: TypeEnum.CHAOS,
+          category: CategoryEnum.WARRIOR
         },
         {
           name: 'Souris',
-          type: 'Chaos',
-          class: 'Magicien'
+          type: TypeEnum.HALO,
+          category: CategoryEnum.WIZARD
         },
-        {
-          name: 'Souris',
-          type: 'Chaos',
-          class: 'Magicien'
-        },
-        {
-          name: 'Souris',
-          type: 'Chaos',
-          class: 'Magicien'
-        },
-        {
-          name: 'Souris',
-          type: 'Chaos',
-          class: 'Magicien'
-        }
       ]
 
       return { cards }
@@ -56,16 +41,16 @@
 </script>
 
 <template>
-  <div class="relative overflow-hidden rounded-xl">
-    <table class="text-left w-full border">
-      <thead class="bg-neutral-800">
+  <div class="app-table relative h-[500px] border rounded-xl overflow-y-scroll">
+    <table class="relative text-left h-full w-full">
+      <thead class="sticky top-0 left-0 bg-neutral-800">
         <tr class="text-white ">
           <th scope="col" class="px-6 py-4 font-normal">Nom</th>
           <th scope="col" class="px-6 py-4 font-normal">Type</th>
           <th scope="col" class="px-6 py-4 font-normal">Classe</th>
         </tr>
       </thead>
-      <tbody class="">
+      <tbody>
         <tr 
           v-for="(card, index) in cards" 
           :key="index"
@@ -73,10 +58,10 @@
         >
           <td scope="col" class="px-6 py-4">{{ card.name }}</td>
           <td scope="col" class="px-6 py-4">
-            <AppChip color="yellow">{{ card.type }}</AppChip>
+            <AppChip color="yellow">{{ $t(`card.types.${card.type}`) }}</AppChip>
           </td>
           <td scope="col" class="px-6 py-4">
-            <AppChip color="sky">{{ card.class }}</AppChip>
+            <AppChip color="sky">{{ $t(`card.categories.${card.category}`) }}</AppChip>
           </td>
         </tr>
       </tbody>
@@ -84,6 +69,8 @@
   </div>
 </template>
 
-
-<style>
+<style scoped>
+  .app-table::-webkit-scrollbar {
+    display: none;
+  }
 </style>

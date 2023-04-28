@@ -63,15 +63,27 @@ export default {
       >
         <font-awesome-icon 
         :class="(isRouteSelected(route.name)) ?
-            'text-3xl text-purple-500' :
-            'text-3xl text-neutral-500'
+            'text-3xl transition-all text-purple-500' :
+            'text-3xl transition-all text-neutral-500'
           " 
         :icon="`fa-solid ${route.icon}`" />
-        <span v-if="isRouteSelected(route.name)" class="bg-purple-500 w-2 h-8 rounded-e-lg absolute left-0 -translate-x-6" />
+        <Transition>
+          <span v-show="isRouteSelected(route.name)" class="bg-purple-500 w-2 h-8 rounded-e-lg absolute left-0 -translate-x-6 transition-all" />
+        </Transition>
       </NavButton>
     </div>
     <span class="text-neutral-500 text-sm text-center">© 2023 Studio Goblins</span>
   </nav>
 </template>
 
-<style scoped></style>
+<style scoped>
+  .v-enter-active,
+  .v-leave-active {
+    transition: opacity .25s ease;
+  }
+
+  .v-enter-from,
+  .v-leave-to {
+    opacity: 0;
+  }
+</style>

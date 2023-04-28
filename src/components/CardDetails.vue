@@ -1,9 +1,11 @@
 <script lang="ts">
-  import AppChip from '@/components/AppChip.vue'
+  import AppChip from '@/components/utils/AppChip.vue'
+  import AppButton from '@/components/utils/AppButton.vue'
   import ConfirmationModal from './modals/ConfirmationModal.vue';
   import { computed, reactive } from 'vue';
+  import SkillList from './SkillList.vue';
 
-  enum SkillCategoryEnum {
+  export enum SkillCategoryEnum {
     ACTIVES = 'actives',
     PASSIVE = 'passive'
   }
@@ -11,20 +13,11 @@
   export default {
     components: {
       AppChip,
+      AppButton,
       ConfirmationModal,
+      SkillList
     },
     setup() {
-      const skillCategories = [
-        {
-          name: 'actives',
-          label: 'Actives'
-        },
-        {
-          name: 'passive',
-          label: 'Passive'
-        },
-      ]
-
       const currentSkills = computed(() => {
         return state.skills[state.selectedSkillCategory]
       })
@@ -54,14 +47,14 @@
 
       const isCategorySelected = (route: string) => route === state.selectedSkillCategory
 
-      return { state, skillCategories, isCategorySelected, currentSkills }
+      return { state, isCategorySelected, currentSkills }
     } 
   }
 </script>
 
 <template>
   <ConfirmationModal 
-    v-if="state.isModalOpened"
+    v-show="state.isModalOpened"
     title="Confirmation de la suppression"
     :close-modal="() => state.isModalOpened = false"
   />
@@ -69,12 +62,8 @@
     <div class="flex justify-between mb-8">
       <h3 class="font-bold text-4xl text-neutral-900">Souris sorcière</h3>
       <div class="flex gap-4">
-        <button class="w-12 h-12 rounded-lg bg-neutral-300">
-          <font-awesome-icon class="text-neutral-900" icon="fa-solid fa-pen" />
-        </button>
-        <button @click="state.isModalOpened = true" class="w-12 h-12 rounded-lg bg-red-300">
-          <font-awesome-icon class="text-red-500" icon="fa-solid fa-trash" />
-        </button>
+        <AppButton :on-click="() => state.isModalOpened = true" color="neutral" icon="fa-pen"/>
+        <AppButton :on-click="() => state.isModalOpened = true" color="red" icon="fa-trash"/>
       </div>
     </div>
 
@@ -103,24 +92,7 @@
         </p>
       </div>
     </div>
-
-    <div class="">
-      <ul class="border-b flex gap-4 pb-2 mb-4">
-        <li @click="state.selectedSkillCategory = skill.name as SkillCategoryEnum" v-for="skill in skillCategories" :key="skill.name" :class="isCategorySelected(skill.name) ? 'relative cursor-pointer text-purple-500' : 'relative cursor-pointer text-neutral-900'">
-          {{ skill.label }}
-          <span v-if="isCategorySelected(skill.name)" class="absolute bg-purple-500 w-full h-[2px] bottom-0 left-0 translate-y-[9px]"></span>
-        </li>
-      </ul>
-      <ul class="flex flex-col gap-4">
-        <li 
-          v-for="skill in currentSkills" :key="skill.name"
-          class="bg-neutral-200 w-full h-24 rounded-lg flex flex-col py-3 px-6 justify-center"
-        >
-          <h4 class="font-bold text-lg">{{ skill.name }}</h4>
-          <p class="text-neutral-500 text-sm">{{ skill.description }}</p>
-        </li>
-      </ul>
-    </div>
+    <SkillList :skills="state.skills" />
   </aside>
 </template>
 

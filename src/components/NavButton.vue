@@ -17,7 +17,7 @@ const isPopoverToggled = ref(false)
     <span 
       @mouseover="isPopoverToggled = true"
       @mouseleave="isPopoverToggled = false"
-      class="relative w-16 h-16 rounded-lg flex items-center justify-center bg-neutral-800">
+      class="relative w-16 h-16 rounded-lg flex items-center justify-center bg-neutral-800 hover:bg-neutral-700 transition-all">
       <slot></slot>
       <Transition>
         <span 

@@ -1,0 +1,15 @@
+{
+  "card": {
+    "types": {
+      "halo": "Halo",
+      "chaos": "Chaos"
+    },
+    "categories": {
+      "archer": "Archer",
+      "wizard": "Mage",
+      "healer": "Soigneur",
+      "warrior": "Guerrier",
+      "rogue": "Assassin"
+    }
+  }
+}
