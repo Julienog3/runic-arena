@@ -25,7 +25,7 @@ const selectedCard = ref<CardType>(cards[0] as CardType)
           class="border border-neutral-300 p-2 rounded-lg" 
         />
       </div>
-      <CardsTable :on-select="(card) => selectedCard = card" :cards="cards as CardType[]" />
+      <CardsTable :selected-card="selectedCard" :on-select="(card) => selectedCard = card" :cards="cards as CardType[]" />
     </div>
     <CardDetails :card="selectedCard" />
   </main>

@@ -2,13 +2,17 @@
   import AppChip from '@/components/utils/AppChip.vue'
   import { TypeEnum, type CardType } from '@/types/card';
   import { ColorEnum } from '@/types/color';
+import { toRaw } from 'vue';
 
   interface CardTableProps {
     cards: CardType[]
+    selectedCard: CardType
     onSelect: (card: CardType) => void
   }
 
   const props = defineProps<CardTableProps>()
+
+  const compareCards = (card: CardType) => card === toRaw(props.selectedCard)
 
   const getColorByType = (type: TypeEnum): ColorEnum => {
     if (type === TypeEnum.CHAOS) {
@@ -38,7 +42,8 @@
         <tr 
           v-for="(card, index) in props.cards" 
           :key="index"
-          class="border-b cursor-pointer"
+          class="border-b cursor-pointer hover:bg-neutral-100 transition-colors"
+          :class="compareCards(card) ? 'bg-neutral-100' : ''"
           @click="onSelect(card)"
         >
           <td scope="col" class="px-6 py-4">{{ card.name }}</td>
