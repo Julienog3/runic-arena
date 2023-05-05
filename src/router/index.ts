@@ -24,4 +24,9 @@ const router = createRouter({
   ]
 })
 
+// router.afterEach((to, from) => {
+//   document.title = to.name
+// })
+
+
 export default router

@@ -20,7 +20,10 @@ defineProps<ModalProps>()
           </button>
         </div>
         <div class="p-4">
-          <slot></slot>
+          <slot name="body"></slot>
+        </div>
+        <div>
+          <slot name="footer"></slot>
         </div>
       </div>
     </div>

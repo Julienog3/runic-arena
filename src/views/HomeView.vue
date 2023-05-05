@@ -5,7 +5,7 @@ import AppSearchBar from '@/components/utils/AppSearchBar.vue';
 import type { CardType } from '@/types/card';
 import data from '@/assets/data.json'
 import { ref } from 'vue';
-import AddingModal from '@/components/modals/AddingModal.vue';
+import AddingModal from '@/components/modals/adding-modal/AddingModal.vue';
 
 const { cards } = data
 

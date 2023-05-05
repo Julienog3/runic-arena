@@ -4,23 +4,21 @@
 
   export default {
     setup() {
-      const card = reactive<CardType>({
-        name: '',
-        type: TypeEnum.CHAOS,
-        description: '',
-        power: 0,
-        category: CategoryEnum.ARCHER,
-        skills: []
-      })
-
-      const submit = (event: Event) => {
-        event.preventDefault()
-        console.log(card)
-      }
-
-      return { card, submit }
-    }
-  }
+        const card = reactive<CardType>({
+            name: "",
+            type: TypeEnum.CHAOS,
+            description: "",
+            power: 0,
+            category: CategoryEnum.ARCHER,
+            skills: []
+        });
+        const submit = (event: Event) => {
+            event.preventDefault();
+        };
+        return { card, submit };
+    },
+    
+}
 </script>
 
 <template>
@@ -93,29 +91,7 @@
         class="border border-neutral-200 p-3 rounded-lg focus:border-violet-500"
       ></textarea>
     </div>
-  </div>
-  <div class="flex w-full justify-between border-t pt-4">
-    <div class="flex gap-2 items-center">
-      <span class="w-4 h-4 bg-neutral-200 rounded-full" />
-      <span class="w-4 h-4 bg-violet-500 rounded-full" />
-      <span class="w-4 h-4 bg-neutral-200 rounded-full" />
-    </div>
-    <div class="flex gap-4">
-      <button
-        type="button"
-        class="font-medium border text-neutral-900 text-md px-12 py-3 rounded-lg"
-      >
-        Retour
-      </button>
-      <button
-        type="submit"
-        class="bg-violet-600  font-medium text-white text-md px-12 py-3 rounded-lg"
-      >
-        Créer la carte
-      </button>
-    </div>
-  </div>
-    
+  </div>    
   </form>
 </template>
 

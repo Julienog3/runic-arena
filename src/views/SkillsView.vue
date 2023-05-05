@@ -1,5 +1,4 @@
 <script setup lang="ts">
-  import AddingForm from '@/components/AddingForm.vue'
   import SkillCard from '@/components/skill-view/SkillCard.vue';
 </script>
 
