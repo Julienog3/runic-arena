@@ -21,7 +21,7 @@ export default {
 </script>
 
 <template>
-  <form @submit="event => submit(event)" class="flex flex-col items-start gap-4">
+  <form @submit="event => submit(event)" class="absolute top-0 left-0  w-full flex flex-col items-start gap-4">
     <div class="flex justify-between w-full gap-4">
       <h1>SkillsForm</h1>
     </div>

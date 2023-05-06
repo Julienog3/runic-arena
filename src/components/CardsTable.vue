@@ -2,11 +2,11 @@
   import AppChip from '@/components/utils/AppChip.vue'
   import { TypeEnum, type CardType } from '@/types/card';
   import { ColorEnum } from '@/types/color';
-import { toRaw } from 'vue';
+  import { toRaw } from 'vue';
 
   interface CardTableProps {
     cards: CardType[]
-    selectedCard: CardType
+    selectedCard?: CardType
     onSelect: (card: CardType) => void
   }
 

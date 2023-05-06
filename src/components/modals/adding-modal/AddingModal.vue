@@ -64,9 +64,11 @@
     :close-modal="() => closeModal()"
   >
     <template #body>
-      <Transition>
-        <component :is="currentTab" />
-      </Transition>
+      <div class="relative w-full min-h-[500px]">
+        <Transition name="slide-fade">
+          <component :is="currentTab" />
+        </Transition>
+      </div>
     </template>
     <template #footer>
       <div class="flex w-full justify-between border-t p-4">
@@ -92,13 +94,18 @@
   </AppModal>
 </template>
 
-<style scoped>  .v-enter-active,
-  .v-leave-active {
-    transition: opacity .25s ease;
+<style scoped>
+  .slide-fade-enter-active {
+    transition: all .3s ease;
+  }
+  .slide-fade-leave-active {
+    transition: all .3s ease;
+  }
+  .slide-fade-enter, .slide-fade-leave-to {
+    transform: translateX(100%);
   }
 
-  .v-enter-from,
-  .v-leave-to {
-    opacity: 0;
+  .slide-fade-leave, .slide-fade-enter-from {
+    transform: translateX(-100%);
   }
 </style>
