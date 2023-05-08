@@ -9,7 +9,7 @@ import AddingModal from '@/components/modals/adding-modal/AddingModal.vue';
 
 const { cards } = data
 
-const selectedCard = ref<CardType>()
+const selectedCard = ref<CardType>(cards[0] as CardType)
 const isAddingModalOpened = ref<boolean>(false)
 
 </script>
@@ -37,20 +37,6 @@ const isAddingModalOpened = ref<boolean>(false)
       </div>
       <CardsTable :selected-card="selectedCard" :on-select="(card) => selectedCard = card" :cards="cards as CardType[]" />
     </div>
-    <Transition>
-      <CardDetails v-if="selectedCard" :card="selectedCard" />
-    </Transition>
+    <CardDetails v-if="selectedCard" :card="selectedCard" />
   </main>
 </template>
-
-<style scoped>
-  .v-enter-active,
-  .v-leave-active {
-    transition: all .25s ease;
-  }
-
-  .v-enter-from,
-  .v-leave-to {
-    transform: translateX(100%);
-  }
-</style>

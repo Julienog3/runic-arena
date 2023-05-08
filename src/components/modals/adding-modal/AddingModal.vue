@@ -1,10 +1,12 @@
 <script setup lang="ts">
-  import { computed, type Component, ref, onUnmounted } from 'vue';
+  import { computed, type Component, ref, onUnmounted, reactive } from 'vue';
   import AppModal from '@/components/modals/AppModal.vue';
-  import AddingForm from '@/components/forms/AddingForm.vue'
+  import AddingForm from '@/components/forms/card/CardInformationsForm.vue'
   import PaginationModal from '@/components/modals/PaginationModal.vue';
-  import ImageForm from '@/components/forms/ImageForm.vue';
-  import SkillsForm from '@/components/forms/SkillsForm.vue';
+  import ImageForm from '@/components/forms/card/CardImageForm.vue';
+  import SkillsForm from '@/components/forms/card/CardSkillsForm.vue';
+  import { TransitionNameEnum } from '@/types/transition';
+import { TypeEnum, type CardType, CategoryEnum } from '@/types/card';
 
   interface AddingModalProps {
     title: string
@@ -17,7 +19,7 @@
     component: Component
   }
 
-  defineProps<AddingModalProps>()
+  const props = defineProps<AddingModalProps>()
   
   const tabs: AddingModalTabType[] = [
     {
@@ -36,18 +38,40 @@
       component: ImageForm
     }
   ]
+
+  const card = reactive<CardType>({
+      name: "",
+      type: TypeEnum.CHAOS,
+      description: "",
+      power: 0,
+      illustration: "",
+      category: CategoryEnum.ARCHER,
+      skills: []
+  });
   
   const currentTabId = ref<number>(0)
 
+  const transitionType = ref<TransitionNameEnum>()
+
   const nextStep = (): void => {
     console.log('next')
+    transitionType.value = TransitionNameEnum.SLIDE_IN
     currentTabId.value += 1
   }
 
   const previousStep = (): void => {
-    console.log('previous')
-    currentTabId.value -= 1
+    transitionType.value = TransitionNameEnum.SLIDE_OUT
+
+    if (currentTabId.value <= 0) {
+      props.closeModal()
+    } else {
+      currentTabId.value -= 1
+    } 
   }
+
+  const submit = (event: Event) => {
+    event.preventDefault();
+  };
 
   const currentTab = computed(() => {
     return tabs.find(({ id }) => currentTabId.value === id)?.component 
@@ -64,11 +88,14 @@
     :close-modal="() => closeModal()"
   >
     <template #body>
-      <div class="relative w-full min-h-[500px]">
-        <Transition name="slide-fade">
-          <component :is="currentTab" />
+      <form 
+        @submit="$event => submit($event)" 
+        class="relative w-full min-h-[500px]"
+      >
+        <Transition :name="transitionType">
+          <component :card="card" :is="currentTab" />
         </Transition>
-      </div>
+      </form>
     </template>
     <template #footer>
       <div class="flex w-full justify-between border-t p-4">
@@ -95,17 +122,32 @@
 </template>
 
 <style scoped>
-  .slide-fade-enter-active {
+  .slide-in-enter-active {
     transition: all .3s ease;
   }
-  .slide-fade-leave-active {
+  .slide-in-leave-active {
     transition: all .3s ease;
   }
-  .slide-fade-enter, .slide-fade-leave-to {
-    transform: translateX(100%);
+  .slide-in-enter, .slide-in-leave-to {
+    transform: translateX(-100%);
+    opacity: 0
   }
 
-  .slide-fade-leave, .slide-fade-enter-from {
+  .slide-in-leave, .slide-in-enter-from {
+    transform: translateX(100%);
+  }
+  .slide-out-enter-active {
+    transition: all .3s ease;
+  }
+  .slide-out-leave-active {
+    transition: all .3s ease;
+  }
+  .slide-out-enter, .slide-out-leave-to {
+    transform: translateX(100%);
+    opacity: 0
+  }
+
+  .slide-out-leave, .slide-out-enter-from {
     transform: translateX(-100%);
   }
 </style>

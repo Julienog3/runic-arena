@@ -9,7 +9,7 @@ defineProps<ModalProps>()
 </script>
 
 <template>
-  <Transition>
+  <Transition appear>
     <div
       class="fixed top-0 left-0 z-50 p-4 flex items-center justify-center overflow-x-hidden overflow-y-auto w-full min-h-screen bg-neutral-950/75">
       <div class="relative bg-white rounded-lg w-1/3 h-fit overflow-hidden">

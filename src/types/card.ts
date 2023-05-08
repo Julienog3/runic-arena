@@ -17,6 +17,7 @@ export type CardType = {
   name: string
   description?: string
   power: number
+  illustration: string
   type: TypeEnum 
   category: CategoryEnum
   skills: SkillType[] 
