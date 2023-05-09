@@ -1,15 +1,29 @@
 <script setup lang="ts">
-  import type { CardType } from '@/types/card'; 
+  import { useAddingCardModalStore } from '@/stores/addingCardModal';
+import type { CardType, CategoryEnum, TypeEnum } from '@/types/card'; 
+  import { onUpdated } from 'vue';
 
   interface CardInformationsFormProps {
-    card: CardType
+    name: string
+    description?: string
+    power: number
+    type: TypeEnum
+    category: CategoryEnum
   }
 
-  defineProps<CardInformationsFormProps>()
-  defineEmits<{
-    (e: 'change', id: number): void
-    (e: 'update', value: string): void
-  }>()
+  const store = useAddingCardModalStore()
+
+  const props = defineProps<CardInformationsFormProps>()
+  // defineEmits<{
+  //   (e: 'change', id: number): void
+  //   (e: 'update', value: string): void
+  // }>()
+  const emit = defineEmits(['update:name', 'update:description', 'update:type', 'update:category', 'update:power'])
+
+  // onUpdated(() => {
+  //   console.log('test')
+  // }) 
+ 
 </script>
 
 <template>
@@ -19,11 +33,10 @@
   <div class="flex justify-between w-full gap-4">
     <div class="flex flex-col w-full">
       <label for="name" class="mb-2">Nom</label>
-      <AppText 
+      <input 
         type="text" 
         id="name"
-        :value="card.name"
-        @input="$emit('update:value', $event.target.value)"
+        v-model="store.card.name"
         placeholder="Nom de la carte"
         class="border border-neutral-200 p-3 rounded-lg focus:border-violet-500 focus-within:border-violet-500 focus-visible:border-violet-500"
       />
@@ -33,8 +46,7 @@
       <select 
         type="text" 
         id="type"
-        :value="card.type"
-        @input="$emit('update:value', $event.target.value)"
+        v-model="store.card.type"
         class="border border-neutral-200 p-3 rounded-lg"
       >
         <option value="chaos" selected>Chaos</option>
@@ -49,8 +61,7 @@
       <input 
         type="number" 
         id="power"
-        :value="card.power"
-        @input="$emit('update:value', $event.target.value)"
+        v-model="store.card.power"
         placeholder="Puissance"
         class="border border-neutral-200 p-3 rounded-lg"
       />
@@ -60,7 +71,7 @@
       <select 
         type="text" 
         id="category"
-        v-model="card.category" 
+        v-model="store.card.category"
         class="border border-neutral-200 p-3 rounded-lg"
       >
         <option value="archer" selected>Archer</option>
@@ -73,13 +84,13 @@
   </div>
   <div class="flex justify-between w-full gap-4">
     <div class="flex flex-col w-full">
-      <label for="power" class="mb-2">Description</label>
+      <label for="description" class="mb-2">Description</label>
       <textarea 
         name="" 
         id="description"
         cols="30" 
         rows="10"
-        v-model="card.description" 
+        v-model="store.card.description"
         placeholder="Ecrivez la description de la carte"
         class="border border-neutral-200 p-3 rounded-lg focus:border-violet-500"
       ></textarea>

@@ -1,12 +1,13 @@
 <script setup lang="ts">
-  import { computed, type Component, ref, onUnmounted, reactive } from 'vue';
+  import { computed, type Component, ref, onUnmounted, reactive, toRaw } from 'vue';
   import AppModal from '@/components/modals/AppModal.vue';
   import AddingForm from '@/components/forms/card/CardInformationsForm.vue'
   import PaginationModal from '@/components/modals/PaginationModal.vue';
   import ImageForm from '@/components/forms/card/CardImageForm.vue';
   import SkillsForm from '@/components/forms/card/CardSkillsForm.vue';
   import { TransitionNameEnum } from '@/types/transition';
-import { TypeEnum, type CardType, CategoryEnum } from '@/types/card';
+  import { TypeEnum, type CardType, CategoryEnum } from '@/types/card';
+  import { useAddingCardModalStore } from '@/stores/addingCardModal'
 
   interface AddingModalProps {
     title: string
@@ -39,24 +40,19 @@ import { TypeEnum, type CardType, CategoryEnum } from '@/types/card';
     }
   ]
 
-  const card = reactive<CardType>({
-      name: "",
-      type: TypeEnum.CHAOS,
-      description: "",
-      power: 0,
-      illustration: "",
-      category: CategoryEnum.ARCHER,
-      skills: []
-  });
+  const store = useAddingCardModalStore()
   
   const currentTabId = ref<number>(0)
 
   const transitionType = ref<TransitionNameEnum>()
 
   const nextStep = (): void => {
-    console.log('next')
     transitionType.value = TransitionNameEnum.SLIDE_IN
     currentTabId.value += 1
+
+    if (currentTabId.value >= tabs.length) {
+      // submit
+    }
   }
 
   const previousStep = (): void => {
@@ -64,6 +60,7 @@ import { TypeEnum, type CardType, CategoryEnum } from '@/types/card';
 
     if (currentTabId.value <= 0) {
       props.closeModal()
+      store.$reset()
     } else {
       currentTabId.value -= 1
     } 
@@ -93,7 +90,7 @@ import { TypeEnum, type CardType, CategoryEnum } from '@/types/card';
         class="relative w-full min-h-[500px]"
       >
         <Transition :name="transitionType">
-          <component :card="card" :is="currentTab" />
+          <component v-bind="card" :is="currentTab" />
         </Transition>
       </form>
     </template>
