@@ -1,49 +1,50 @@
 <script setup lang="ts">
 import SkillsDropdown from '@/components/modals/adding-modal/SkillsDropdown.vue';
 import { getAllSkills } from '@/services/skill.service';
-import { SkillTypeEnum, type SkillType } from '@/types/skill';
-import { onMounted, ref } from 'vue';
+import { useAddingCardModalStore } from '@/stores/addingCardModal';
+import type { CardPayloadType } from '@/types/card';
+import type { SkillType } from '@/types/skill';
+import { computed, onMounted, onUpdated, ref } from 'vue';
 
-interface CardSkillsFormProps {
-  skills: SkillType[]
-}
+const store = useAddingCardModalStore()
 
-const activeSkills = ref<SkillType[]>([])
+const allSkills = ref<SkillType[]>([])
+
+const getPassiveSkills = computed(() => allSkills.value.filter((skill) => !skill.isActive))
+const getActiveSkills = computed(() => allSkills.value.filter((skill) => skill.isActive))
 
 onMounted(async () => {
-  activeSkills.value = await getAllSkills()
-}) 
+  allSkills.value = await getAllSkills()
+})
 
-console.log(activeSkills)
-
-const props = defineProps<CardSkillsFormProps>()
 </script>
 
 <template>
   <form class="absolute top-0 left-0  w-full flex flex-col items-start gap-4">
     <div class="flex flex-col justify-between w-full gap-4">
       <h2 class="text-lg font-semibold text-neutral-800">Capacités actives</h2>
-      <div  class="flex flex-col w-full">
-        <label for="type" class="mb-2">Capacité n°1</label>
+      <div v-for="(skillId, index) in store.card.activeSkills" :key="index" class="flex flex-col w-full">
+        <label for="type" class="mb-2">Capacité n°{{ index + 1 }}</label>
         <select 
           type="text" 
           id="type"
+          v-model="store.card.activeSkills[index]"
           class="border border-neutral-200 p-3 rounded-lg"
         >
-          <option v-for="skill in activeSkills" :key="skill.name" :value="skill.name" selected>{{ skill.name }}</option>
+          <option v-for="skill in getActiveSkills" :key="skill.name" :value="skill.id">{{ skill.name }}</option>
         </select>
       </div>
-      <span class="text-violet-500 font-semibold cursor-pointer">+ Ajouter une capacité</span>
+      <span @click="store.addActiveSkill()" class="text-violet-500 font-semibold cursor-pointer">+ Ajouter une capacité</span>
       <div class="flex flex-col w-full">
         <h2 class="text-lg font-semibold text-neutral-800">Capacité passive</h2>
         <label for="type" class="mb-2">Type</label>
         <select 
           type="text" 
           id="type"
+          v-model="store.card.passiveSkill"
           class="border border-neutral-200 p-3 rounded-lg"
         >
-          <option value="chaos" selected>Chaos</option>
-          <option value="halo">Halo</option>
+        <option v-for="skill in getPassiveSkills" :key="skill.name" :value="skill.id">{{ skill.name }}</option>
         </select>
       </div>
     </div>

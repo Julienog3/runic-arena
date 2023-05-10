@@ -26,3 +26,14 @@ export type CardType = {
   skills: SkillType[] 
 }
 
+export type CardPayloadType = {
+  name: string
+  description?: string
+  value: number
+  image: string
+  typeId: number
+  classId: number
+  activeSkills: number[] 
+  passiveSkill: number
+}
+

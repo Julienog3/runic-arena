@@ -1,4 +1,4 @@
-import type { CardType, CategoryEnum, TypeEnum } from "@/types/card"
+import type { CardPayloadType, CardType, CategoryEnum, TypeEnum } from "@/types/card"
 
 const API_ENDPOINT = 'http://localhost:3000'
 
@@ -13,12 +13,6 @@ const getCardCategory = async (id: number): Promise<CategoryEnum> => {
     .then(res => res.json())
     .then(data => data.name as CategoryEnum)
 }
-
-// const getCardSkills = async (id: number): Promise<CategoryEnum> => {
-//   return await fetch(`${API_ENDPOINT}/classes/${id}`)
-//     .then(res => res.json())
-//     .then(data => data.name as CategoryEnum)
-// }
 
 export const getAllCards = async () => {
   let cards = await fetch(`${API_ENDPOINT}/cards`, {
@@ -39,5 +33,12 @@ export const getAllCards = async () => {
 export const deleteCard = async (id :number) => {
   await fetch(`${API_ENDPOINT}/cards/${id}`, {
     method: 'DELETE'
+  })
+}
+
+export const createCard = async (card: CardPayloadType) => {
+  await fetch(`${API_ENDPOINT}/cards`, {
+    method: 'POST',
+    body: JSON.stringify(card)
   })
 }

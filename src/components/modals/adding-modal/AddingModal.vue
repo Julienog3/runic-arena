@@ -6,8 +6,8 @@
   import ImageForm from '@/components/forms/card/CardImageForm.vue';
   import SkillsForm from '@/components/forms/card/CardSkillsForm.vue';
   import { TransitionNameEnum } from '@/types/transition';
-  import { TypeEnum, type CardType, CategoryEnum } from '@/types/card';
   import { useAddingCardModalStore } from '@/stores/addingCardModal'
+  import { createCard } from '@/services/card.service'
 
   interface AddingModalProps {
     title: string
@@ -46,12 +46,16 @@
 
   const transitionType = ref<TransitionNameEnum>()
 
-  const nextStep = (): void => {
+  const nextStep = async (): Promise<void> => {
     transitionType.value = TransitionNameEnum.SLIDE_IN
-    currentTabId.value += 1
-
-    if (currentTabId.value >= tabs.length) {
-      // submit
+    
+    if (currentTabId.value >= tabs.length - 1) {
+      await createCard(store.card).then(() => {
+        props.closeModal()
+        store.$reset()
+      })
+    } else {
+      currentTabId.value += 1
     }
   }
 
@@ -82,7 +86,10 @@
 <template>
   <AppModal 
     :title="title"
-    :close-modal="() => closeModal()"
+    :close-modal="() => {
+      store.$reset()
+      closeModal()
+    }"
   >
     <template #body>
       <form 

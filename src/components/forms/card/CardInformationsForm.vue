@@ -1,18 +1,24 @@
 <script setup lang="ts">
+  import { getAllCategories } from '@/services/category.service';
+  import { getAllTypes } from '@/services/type.service';
   import { useAddingCardModalStore } from '@/stores/addingCardModal';
-import type { CardType, CategoryEnum, TypeEnum } from '@/types/card'; 
-  import { onUpdated } from 'vue';
-
-  interface CardInformationsFormProps {
-    name: string
-    description?: string
-    power: number
-    type: TypeEnum
-    category: CategoryEnum
-  }
+  import { onMounted, ref } from 'vue';
 
   const store = useAddingCardModalStore()
- 
+
+  interface ResponseItem {
+    id: number
+    name: string
+  }
+
+  const types = ref<ResponseItem[]>([])
+  const categories = ref<ResponseItem[]>([])
+
+  onMounted(async () => {
+    types.value = await getAllTypes()
+    categories.value = await getAllCategories()
+  })
+
 </script>
 
 <template>
@@ -35,11 +41,10 @@ import type { CardType, CategoryEnum, TypeEnum } from '@/types/card';
       <select 
         type="text" 
         id="type"
-        v-model="store.card.type"
+        v-model="store.card.typeId"
         class="border border-neutral-200 p-3 rounded-lg"
       >
-        <option value="chaos" selected>Chaos</option>
-        <option value="halo">Halo</option>
+        <option v-for="cardType in types" :key="cardType.id" :value="cardType.id">{{ cardType.name }}</option>
       </select>
     </div>
     
@@ -50,7 +55,7 @@ import type { CardType, CategoryEnum, TypeEnum } from '@/types/card';
       <input 
         type="number" 
         id="power"
-        v-model="store.card.power"
+        v-model="store.card.value"
         placeholder="Puissance"
         class="border border-neutral-200 p-3 rounded-lg"
       />
@@ -60,14 +65,10 @@ import type { CardType, CategoryEnum, TypeEnum } from '@/types/card';
       <select 
         type="text" 
         id="category"
-        v-model="store.card.category"
+        v-model="store.card.classId"
         class="border border-neutral-200 p-3 rounded-lg"
       >
-        <option value="archer" selected>Archer</option>
-        <option value="warrior">Guerrier</option>
-        <option value="healer">Soigneur</option>
-        <option value="wizard">Mage</option>
-        <option value="rogue">Assassin</option>
+        <option v-for="category in categories" :key="category.id" :value="category.id">{{ category.name }}</option>
       </select>
     </div>
   </div>
