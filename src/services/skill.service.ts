@@ -40,3 +40,33 @@ export const editSkill = async (id: number, skill: SkillType) => {
 
   return response
 }
+
+export const addSkill = async (skill: SkillType) => {
+  const requestOptions = {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(
+      { 
+        name: skill.name,
+        description: skill.description,
+        value: skill.value,
+        isPercentage: skill.isPercentage,
+        isActive: skill.isActive,
+        red: skill.red,
+        blue: skill.blue,
+        yellow: skill.yellow
+      }
+      )
+  };
+  const response = await fetch(`${API_ENDPOINT}/skills`, requestOptions)
+  .then(res => window.location.reload())
+}
+
+export const deleteSkill = async (id: number) => {
+  const requestOptions = {
+    method: "DELETE",
+    headers: { "Content-Type": "application/json" },
+  };
+  const response = await fetch(`${API_ENDPOINT}/skills/${id}`, requestOptions)
+  .then(res => {window.history.back()})
+}
