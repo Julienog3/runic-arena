@@ -16,7 +16,7 @@ const formatSkillDescription = () => {
 </script>
 
 <template>
-  <article class="rounded-lg border border-neutral-300 min-h-40 p-8 bg-white">
+  <a :href="'/skill/' + skill.id" class="rounded-lg border border-neutral-300 min-h-40 p-8 bg-white">
     <div class="flex items-center justify-between border-b border-neutral-300 pb-4 mb-4">
       <div class="flex items-center gap-4">
         <font-awesome-icon class="text-neutral-300 text-3xl " icon="fa-solid fa-fire" />
@@ -30,5 +30,5 @@ const formatSkillDescription = () => {
       <AppChip :color="ColorEnum.SKY">{{ skill.isActive ? SkillTypeEnum.ACTIVE : SkillTypeEnum.PASSIVE }}</AppChip> 
     </div>
     <article class="prose prose-neutral">{{ formatSkillDescription() }}</article>
-  </article>
+  </a>
 </template>

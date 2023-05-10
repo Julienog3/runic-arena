@@ -9,10 +9,12 @@ export enum SkillTypeEnum {
 }
 
 export type SkillType = {
+  id: Number
   name: string
   description: string
   value?: number
   valueUnit?: SkillUnitEnum
+  isPercentage?: boolean
   isActive?: boolean
   red?: number
   blue?: number
