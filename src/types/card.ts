@@ -1,8 +1,8 @@
 import type { SkillType } from "./skill"
 
 export enum TypeEnum {
-  CHAOS = 'chaos',
-  HALO = 'halo'
+  CHAOS = 'Chaos',
+  HALO = 'Halo'
 }
 
 export enum CategoryEnum {

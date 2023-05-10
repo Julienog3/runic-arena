@@ -3,5 +3,6 @@ export enum ColorEnum {
   PURPLE = 'purple',
   SKY = 'sky',
   RED = 'red',
-  YELLOW = 'yellow'
+  YELLOW = 'yellow',
+  GREEN = 'green'
 }

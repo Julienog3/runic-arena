@@ -14,6 +14,7 @@
     [ColorEnum.SKY]: "bg-sky-200 text-sky-500",
     [ColorEnum.RED]: "bg-red-200 text-red-500",
     [ColorEnum.YELLOW]: "bg-yellow-100 text-yellow-500",
+    [ColorEnum.GREEN]: "bg-green-200 text-green-500",
   }
 
   const getColor = computed(() => colors[props.color])

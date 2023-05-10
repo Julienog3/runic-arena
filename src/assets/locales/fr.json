@@ -7,8 +7,8 @@
   },
   "card": {
     "types": {
-      "halo": "Halo",
-      "chaos": "Chaos"
+      "Halo": "Halo",
+      "Chaos": "Chaos"
     },
     "categories": {
       "archer": "Archer",

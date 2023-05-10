@@ -3,6 +3,7 @@ import { ColorEnum } from '@/types/color';
 import AppChip from '../utils/AppChip.vue';
 import type { SkillType } from '@/types/skill';
 import { SkillTypeEnum } from '@/types/skill';
+import { computed } from 'vue';
 
 interface SkillCardProps {
   skill: SkillType
@@ -10,9 +11,9 @@ interface SkillCardProps {
 
 const props = defineProps<SkillCardProps>()
 
-const formatSkillDescription = () => {
+const formatSkillDescription = computed(() => {
   return props.skill.description.replace('X', `\`${props.skill.value?.toString()}\`` ?? '')
-}
+})
 </script>
 
 <template>
@@ -27,8 +28,8 @@ const formatSkillDescription = () => {
           <span v-for="(_, index) in Array(skill.yellow).fill(0)" :key="index"  class="relative flex w-4 h-4 rounded-full bg-yellow-500 border-4 border-yellow-200"/>
         </div>
       </div>
-      <AppChip :color="ColorEnum.SKY">{{ skill.isActive ? SkillTypeEnum.ACTIVE : SkillTypeEnum.PASSIVE }}</AppChip> 
+      <AppChip :color="skill.isActive ? ColorEnum.SKY : ColorEnum.GREEN">{{ skill.isActive ? SkillTypeEnum.ACTIVE : SkillTypeEnum.PASSIVE }}</AppChip> 
     </div>
-    <article class="prose prose-neutral">{{ formatSkillDescription() }}</article>
+    <article class="prose prose-neutral">{{ formatSkillDescription }}</article>
   </router-link>
 </template>

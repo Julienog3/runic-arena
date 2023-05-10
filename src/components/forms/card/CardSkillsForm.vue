@@ -1,10 +1,8 @@
 <script setup lang="ts">
-import SkillsDropdown from '@/components/modals/adding-modal/SkillsDropdown.vue';
 import { getAllSkills } from '@/services/skill.service';
 import { useAddingCardModalStore } from '@/stores/addingCardModal';
-import type { CardPayloadType } from '@/types/card';
 import type { SkillType } from '@/types/skill';
-import { computed, onMounted, onUpdated, ref } from 'vue';
+import { computed, onMounted, ref } from 'vue';
 
 const store = useAddingCardModalStore()
 

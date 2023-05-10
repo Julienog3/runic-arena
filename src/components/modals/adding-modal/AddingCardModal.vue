@@ -110,14 +110,14 @@
           @click="previousStep()"
           class="font-medium border text-neutral-900 text-md px-12 py-3 rounded-lg"
         >
-          Retour
+          {{ (currentTabId <= 0) ? 'Annuler' : 'Retour'}}
         </button>
         <button
           type="button"
           @click="nextStep()"
           class="bg-violet-600  font-medium text-white text-md px-12 py-3 rounded-lg"
         >
-          Créer la carte
+          {{ (currentTabId >= tabs.length - 1) ? 'Créer la carte' : 'Suivant'}}
         </button>
       </div>
     </div>

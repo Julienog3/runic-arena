@@ -3,7 +3,7 @@ import CardsTable from '@/components/CardsTable.vue';
 import CardDetails from '@/components/CardDetails.vue';
 import AppSearchBar from '@/components/utils/AppSearchBar.vue';
 import type { CardType } from '@/types/card';
-import { onMounted, ref } from 'vue';
+import { computed, onMounted, onUpdated, ref, watch } from 'vue';
 import AddingCardModal from '@/components/modals/adding-modal/AddingCardModal.vue';
 import { getAllCards } from '@/services/card.service';
 
@@ -12,10 +12,24 @@ const cards = ref<CardType[]>([])
 const selectedCard = ref<CardType>()
 const isAddingCardModalOpened = ref<boolean>(false)
 
+const searchFilter = ref<string>('')
+
 onMounted(async (): Promise<void> => {
   cards.value = await getAllCards()
   selectedCard.value = cards.value[0]
 }) 
+
+watch(isAddingCardModalOpened, async () => {
+  cards.value = await getAllCards()
+})
+
+const filteredCards = computed(() => {
+  return cards.value.filter((card) => {
+    console.log(card.name.toLowerCase(), searchFilter.value.toLowerCase())
+    return card.name.toLowerCase().includes(searchFilter.value.toLowerCase())
+  })
+})
+
 </script>
 
 <template>
@@ -32,14 +46,19 @@ onMounted(async (): Promise<void> => {
           <h2 class="text-xl text-neutral-400 ">{{ $t('home.title') }}</h2>
         </div>
         <div class="flex gap-4">
-          <AppSearchBar />
+          <input
+            type="text"
+            placeholder="Rechercher une carte"
+            v-model="searchFilter"
+            class="border border-neutral-300 p-2 rounded-lg" 
+          />
           <button @click="isAddingCardModalOpened = true" class="flex gap-2 items-center p-4 text-white bg-neutral-800 font-medium rounded-lg">
             <font-awesome-icon class=" mr-2" icon="fa-solid fa-plus" />
             Ajouter une carte
           </button>
         </div>
       </div>
-      <CardsTable :selected-card="selectedCard" :on-select="(card) => selectedCard = card" :cards="cards as CardType[]" />
+      <CardsTable :selected-card="selectedCard" :on-select="(card) => selectedCard = card" :cards="filteredCards as CardType[]" />
     </div>
     <CardDetails v-if="selectedCard" :card="selectedCard" />
   </main>

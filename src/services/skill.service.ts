@@ -40,7 +40,7 @@ export const editSkill = async (id: number, skill: SkillType) => {
   return response
 }
 
-export const addSkill = async (skill: SkillType) => {
+export const createSkill = async (skill: SkillType) => {
   const requestOptions = {
     method: "POST",
     headers: { "Content-Type": "application/json" },

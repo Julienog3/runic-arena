@@ -1,8 +1,8 @@
 <script setup lang="ts">
   import AppChip from '@/components/utils/AppChip.vue'
-  import { TypeEnum, type CardType, CategoryEnum } from '@/types/card';
+  import { TypeEnum, type CardType } from '@/types/card';
   import { ColorEnum } from '@/types/color';
-  import { toRaw } from 'vue';
+  import { computed, toRaw } from 'vue';
 
   interface CardTableProps {
     cards: CardType[]
@@ -11,6 +11,20 @@
   }
 
   const props = defineProps<CardTableProps>()
+
+  const filteredCards = computed(() => {
+    const cards = [...props.cards]
+
+    return cards.sort(function (a, b) {
+      if (a.name < b.name) {
+        return -1;
+      }
+      if (a.name > b.name) {
+        return 1;
+      }
+      return 0;
+    })
+  })
 
   const compareCards = (card: CardType) => card === toRaw(props.selectedCard)
 
@@ -26,8 +40,6 @@
     return ColorEnum.NEUTRAL
   }
 
-  console.log(props.cards)
-
 </script>
 
 <template>
@@ -42,7 +54,7 @@
       </thead>
       <tbody>
         <tr 
-          v-for="(card, index) in props.cards" 
+          v-for="(card, index) in filteredCards" 
           :key="index"
           class="border-b cursor-pointer hover:bg-neutral-100 h-20 transition-colors"
           :class="compareCards(card) ? 'bg-neutral-100' : ''"
