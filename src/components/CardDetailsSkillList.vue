@@ -30,9 +30,6 @@ const selectSkillType = (skillType: SkillTypeEnum) => {
   const previousSkillTypeIndex = skillCategories.findIndex((skill) => skill.name === selectedSkillType.value)
   const nextSkillTypeIndex = skillCategories.findIndex((skill) => skill.name === skillType)
 
-
-  
-
   if (previousSkillTypeIndex > nextSkillTypeIndex) {
     transitionName.value = TransitionNameEnum.SLIDE_IN
   } else {
@@ -44,7 +41,7 @@ const selectSkillType = (skillType: SkillTypeEnum) => {
 }
 
 const currentSkills = computed(() => {
-  return props.skills.filter((skill) => skill.type === selectedSkillType.value)
+  return props.skills.filter((skill) => (skill.isActive ? SkillTypeEnum.ACTIVE : SkillTypeEnum.PASSIVE) === selectedSkillType.value)
 })
 </script>
 

@@ -3,15 +3,19 @@ import CardsTable from '@/components/CardsTable.vue';
 import CardDetails from '@/components/CardDetails.vue';
 import AppSearchBar from '@/components/utils/AppSearchBar.vue';
 import type { CardType } from '@/types/card';
-import data from '@/assets/data.json'
-import { ref } from 'vue';
+import { onMounted, ref } from 'vue';
 import AddingModal from '@/components/modals/adding-modal/AddingModal.vue';
+import { getAllCards } from '@/services/card.service';
 
-const { cards } = data
+const cards = ref<CardType[]>([])
 
-const selectedCard = ref<CardType>(cards[0] as CardType)
+const selectedCard = ref<CardType>()
 const isAddingModalOpened = ref<boolean>(false)
 
+onMounted(async (): Promise<void> => {
+  cards.value = await getAllCards()
+  selectedCard.value = cards.value[0]
+}) 
 </script>
 
 <template>

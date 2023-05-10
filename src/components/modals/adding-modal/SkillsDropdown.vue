@@ -3,7 +3,7 @@ import type { SkillType } from '@/types/skill';
 
   interface SkillsDropdownProps {
     skills: SkillType[]
-    selectedSkill: SkillType
+    selectedSkill?: SkillType
   }
 
 

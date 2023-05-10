@@ -13,5 +13,8 @@ export type SkillType = {
   description: string
   value?: number
   valueUnit?: SkillUnitEnum
-  type?: SkillTypeEnum
+  isActive?: boolean
+  red?: number
+  blue?: number
+  yellow?: number
 }

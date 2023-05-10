@@ -5,7 +5,11 @@ interface SkillCardProps {
   skill: SkillType
 }
 
-defineProps<SkillCardProps>()
+const props = defineProps<SkillCardProps>()
+
+const formatSkillDescription = () => {
+  return props.skill.description.replace('X', `\`${props.skill.value?.toString()}\`` ?? '')
+}
 </script>
 
 <template>
@@ -15,7 +19,7 @@ defineProps<SkillCardProps>()
     </span>
     <div class="flex flex-col">
       <h4 class="font-bold text-lg">{{ skill.name }}</h4>
-      <p class="text-neutral-500 text-sm">{{ skill.description }}</p>
+      <p class="prose">{{ formatSkillDescription() }}</p>
     </div>
   </li>
 </template>

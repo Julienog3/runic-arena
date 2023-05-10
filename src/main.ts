@@ -3,6 +3,9 @@ import { createPinia } from 'pinia'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { createI18n } from 'vue-i18n'
 
+// import * as dotenv from 'dotenv'
+// dotenv.config()
+
 import { faHouse, faPlus, faGear, faPen, faTrash, faXmark, faPeopleGroup, faFire, faDragon } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 

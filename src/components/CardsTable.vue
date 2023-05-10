@@ -1,6 +1,6 @@
 <script setup lang="ts">
   import AppChip from '@/components/utils/AppChip.vue'
-  import { TypeEnum, type CardType } from '@/types/card';
+  import { TypeEnum, type CardType, CategoryEnum } from '@/types/card';
   import { ColorEnum } from '@/types/color';
   import { toRaw } from 'vue';
 
@@ -26,6 +26,8 @@
     return ColorEnum.NEUTRAL
   }
 
+  console.log(props.cards)
+
 </script>
 
 <template>
@@ -38,11 +40,11 @@
           <th scope="col" class="px-6 py-4 font-medium">{{ $t(`globals.category`) }}</th>
         </tr>
       </thead>
-      <tbody>
+      <tbody class="h-full">
         <tr 
           v-for="(card, index) in props.cards" 
           :key="index"
-          class="border-b cursor-pointer hover:bg-neutral-100 transition-colors"
+          class="border-b cursor-pointer hover:bg-neutral-100 max-h-20 transition-colors"
           :class="compareCards(card) ? 'bg-neutral-100' : ''"
           @click="onSelect(card)"
         >
@@ -51,7 +53,7 @@
             <AppChip :color="getColorByType(card.type)">{{ $t(`card.types.${card.type}`) }}</AppChip>
           </td>
           <td scope="col" class="px-6 py-4">
-            <AppChip color="sky">{{ $t(`card.categories.${card.category}`) }}</AppChip>
+            <AppChip color="sky">{{ card.category }}</AppChip>
           </td>
         </tr>
       </tbody>

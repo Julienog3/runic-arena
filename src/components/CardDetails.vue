@@ -38,7 +38,7 @@
           alt=""
         >
         <span class="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 w-12 h-12 rounded-full flex items-center justify-center text-orange-500 bg-orange-200 text-lg font-semibold">
-          {{ props.card.power }}
+          {{ props.card.value }}
         </span>
       </div>
       <div class="flex flex-col gap-4">
@@ -57,7 +57,7 @@
         </p>
       </div>
     </div>
-    <CardDetailsSkillList :skills="props.card.skills" />
+    <CardDetailsSkillList v-if="card.skills"  :skills="card.skills" />
   </aside>
 </template>
 
