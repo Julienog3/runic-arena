@@ -32,7 +32,7 @@
 
 <template>
   <div class="app-table relative h-[500px] border rounded-xl overflow-y-scroll bg-white">
-    <table class="relative text-left h-full w-full">
+    <table class="relative text-left w-full">
       <thead class="sticky top-0 left-0 bg-neutral-800">
         <tr class="text-white ">
           <th scope="col" class="px-6 py-4 font-medium">{{ $t(`globals.name`) }}</th>
@@ -40,19 +40,19 @@
           <th scope="col" class="px-6 py-4 font-medium">{{ $t(`globals.category`) }}</th>
         </tr>
       </thead>
-      <tbody class="h-full">
+      <tbody>
         <tr 
           v-for="(card, index) in props.cards" 
           :key="index"
-          class="border-b cursor-pointer hover:bg-neutral-100 max-h-20 transition-colors"
+          class="border-b cursor-pointer hover:bg-neutral-100 h-20 transition-colors"
           :class="compareCards(card) ? 'bg-neutral-100' : ''"
           @click="onSelect(card)"
         >
-          <td scope="col" class="px-6 py-4">{{ card.name }}</td>
-          <td scope="col" class="px-6 py-4">
+          <td scope="col" class="h-20 px-6 py-4">{{ card.name }}</td>
+          <td scope="col" class="h-20 px-6 py-4">
             <AppChip :color="getColorByType(card.type)">{{ $t(`card.types.${card.type}`) }}</AppChip>
           </td>
-          <td scope="col" class="px-6 py-4">
+          <td scope="col" class="h-20 px-6 py-4">
             <AppChip color="sky">{{ card.category }}</AppChip>
           </td>
         </tr>

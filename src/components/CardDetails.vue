@@ -31,7 +31,7 @@
     </div>
 
     <div class="flex gap-8 mb-12">
-      <div class="relative w-full">
+      <div class="relative max-w-[180px]">
         <img 
           class="rounded-lg"
           src="@/assets/sample-card.jpg"
@@ -41,7 +41,7 @@
           {{ props.card.value }}
         </span>
       </div>
-      <div class="flex flex-col gap-4">
+      <div class="flex flex-col gap-4 w-full">
         <div class="flex gap-8">
           <div class="flex flex-col gap-2">
             <h4 class="text-lg font-semibold text-neutral-500">{{ $t('globals.type') }}</h4>
@@ -49,10 +49,10 @@
           </div>
           <div class="flex flex-col gap-2">
             <h4 class="text-lg font-semibold text-neutral-500">{{ $t('globals.category') }}</h4>
-            <AppChip color="sky">{{ $t(`card.categories.${props.card.category}`) }}</AppChip>
+            <AppChip color="sky">{{ card.category }}</AppChip>
           </div>
         </div>
-        <p class=" text-neutral-500">
+        <p class="text-neutral-500">
           {{ props.card.description }}
         </p>
       </div>

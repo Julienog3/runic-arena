@@ -4,8 +4,8 @@ export enum SkillUnitEnum {
 }
 
 export enum SkillTypeEnum {
-  ACTIVE = 'active',
-  PASSIVE = 'passive',
+  ACTIVE = 'Active',
+  PASSIVE = 'Passive',
 }
 
 export type SkillType = {
