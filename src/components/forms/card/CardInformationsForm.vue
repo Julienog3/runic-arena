@@ -12,17 +12,6 @@ import type { CardType, CategoryEnum, TypeEnum } from '@/types/card';
   }
 
   const store = useAddingCardModalStore()
-
-  const props = defineProps<CardInformationsFormProps>()
-  // defineEmits<{
-  //   (e: 'change', id: number): void
-  //   (e: 'update', value: string): void
-  // }>()
-  const emit = defineEmits(['update:name', 'update:description', 'update:type', 'update:category', 'update:power'])
-
-  // onUpdated(() => {
-  //   console.log('test')
-  // }) 
  
 </script>
 

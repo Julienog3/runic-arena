@@ -2,7 +2,7 @@
   import AppChip from '@/components/utils/AppChip.vue'
   import AppButton from '@/components/utils/AppButton.vue'
   import ConfirmationModal from './modals/ConfirmationModal.vue';
-  import { ref, toRaw } from 'vue';
+  import { ref } from 'vue';
   import CardDetailsSkillList from './CardDetailsSkillList.vue';
   import type { CardType } from '@/types/card';
   import { deleteCard } from '@/services/card.service'

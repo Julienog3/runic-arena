@@ -4,9 +4,8 @@
   import { editSkill } from '@/services/skill.service';
   import { getOneSkill } from '@/services/skill.service';
   import type { SkillType } from '@/types/skill';
-import { number } from '@intlify/core-base';
   import { onMounted, ref } from 'vue';
-import { useRoute } from 'vue-router';
+  import { useRoute } from 'vue-router';
 
   const skill = ref<SkillType[]>([])
   

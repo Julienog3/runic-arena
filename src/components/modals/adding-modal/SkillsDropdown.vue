@@ -6,7 +6,6 @@ import type { SkillType } from '@/types/skill';
     selectedSkill?: SkillType
   }
 
-
   const props = defineProps<SkillsDropdownProps>()
 </script>
 
