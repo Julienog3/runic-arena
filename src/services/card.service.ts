@@ -35,3 +35,9 @@ export const getAllCards = async () => {
 
   return cards
 }
+
+export const deleteCard = async (id :number) => {
+  await fetch(`${API_ENDPOINT}/cards/${id}`, {
+    method: 'DELETE'
+  })
+}

@@ -90,7 +90,7 @@
         class="relative w-full min-h-[500px]"
       >
         <Transition :name="transitionType">
-          <component v-bind="card" :is="currentTab" />
+          <component :is="currentTab" />
         </Transition>
       </form>
     </template>

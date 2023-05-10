@@ -4,9 +4,9 @@
   import { getOneSkill } from '@/services/skill.service';
   import { deleteSkill } from '@/services/skill.service';
   import type { SkillType } from '@/types/skill';
-  import ConfirmationModal from '@/components/modals/ConfirmationModal.vue';
+import { number } from '@intlify/core-base';
   import { onMounted, ref } from 'vue';
-import { useRoute } from 'vue-router';
+  import { useRoute } from 'vue-router';
 
   const skill = ref<SkillType[]>([])
   

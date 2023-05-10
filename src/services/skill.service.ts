@@ -18,7 +18,6 @@ export const getOneSkill = async (id: number) => {
 }
 
 export const editSkill = async (id: number, skill: SkillType) => {
-
   const requestOptions = {
     method: "PUT",
     headers: { "Content-Type": "application/json" },

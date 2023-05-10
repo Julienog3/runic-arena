@@ -5,12 +5,18 @@
   import { ref } from 'vue';
   import CardDetailsSkillList from './CardDetailsSkillList.vue';
   import type { CardType } from '@/types/card';
+  import { deleteCard } from '@/services/card.service'
 
   interface CardDetailsProps {
     card: CardType
   }
 
   const props = defineProps<CardDetailsProps>()
+
+  const handleDelete = (): void => {
+    deleteCard(props.card.id)
+    isModalOpened.value = false
+  }
 
   const isModalOpened = ref(false)
 </script>
@@ -20,6 +26,7 @@
     v-show="isModalOpened"
     title="Confirmation de la suppression"
     :close-modal="() => isModalOpened = false"
+    :on-delete="() => handleDelete()"
   />
   <aside class="w-4/6 border-l p-8 bg-white">
     <div class="flex justify-between mb-8">
