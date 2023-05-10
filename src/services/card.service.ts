@@ -37,8 +37,33 @@ export const deleteCard = async (id :number) => {
 }
 
 export const createCard = async (card: CardPayloadType) => {
+  const skillsPayload = [...card.activeSkills, card.passiveSkill].map((skill) => {
+    return {
+      id: skill
+    }
+  })
+
   await fetch(`${API_ENDPOINT}/cards`, {
     method: 'POST',
-    body: JSON.stringify(card)
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      name: card.name,
+      description: card.description,
+      image: card.image,
+      type:  {
+        connect: {
+          id: card.typeId
+        }
+      },
+      class: {
+        connect: {
+          id: card.classId
+        }
+      },
+      value: card.value,
+      skills: {
+        connect: skillsPayload
+      }
+    })
   })
 }

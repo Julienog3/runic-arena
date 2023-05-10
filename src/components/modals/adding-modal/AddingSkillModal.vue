@@ -5,7 +5,6 @@
   import PaginationModal from '@/components/modals/PaginationModal.vue';
   import ImageForm from '@/components/forms/card/CardImageForm.vue';
   import SkillsForm from '@/components/forms/skill/SkillForm.vue';
-  import { TransitionNameEnum } from '@/types/transition';
   import { TypeEnum, type CardType, CategoryEnum } from '@/types/card';
   import type { SkillType } from '@/types/skill';
   import { useAddingCardModalStore } from '@/stores/addingCardModal'
@@ -23,68 +22,18 @@ import { faL } from '@fortawesome/free-solid-svg-icons';
     component: Component
   }
 
-  const props = defineProps<AddingModalProps>()
-  
-  const tabs: AddingModalTabType[] = [
-    {
-      id: 0,
-      name: 'adding-form',
-      component: AddingForm
-    },
-    {
-      id: 1,
-      name: 'skills-form',
-      component: SkillsForm
-    },
-    {
-      id: 2,
-      name: 'image-form',
-      component: ImageForm
-    }
-  ]
+  defineProps<AddingModalProps>()
 
   const skill = ref<SkillType>({
     isActive: false,
     isPercentage: false
   })
 
-  const store = useAddingCardModalStore()
-  
-  const currentTabId = ref<number>(0)
-
-  const transitionType = ref<TransitionNameEnum>()
-
-  const nextStep = (): void => {
-    transitionType.value = TransitionNameEnum.SLIDE_IN
-    currentTabId.value += 1
-
-    if (currentTabId.value >= tabs.length) {
-      // submit
-    }
-  }
-
-  const previousStep = (): void => {
-    transitionType.value = TransitionNameEnum.SLIDE_OUT
-
-    if (currentTabId.value <= 0) {
-      props.closeModal()
-      store.$reset()
-    } else {
-      currentTabId.value -= 1
-    } 
-  }
 
   const submit = (event: Event) => {
     event.preventDefault();
   };
 
-  const currentTab = computed(() => {
-    return tabs.find(({ id }) => currentTabId.value === id)?.component 
-  })
-
-  onUnmounted(() => {
-    currentTabId.value = 0
-  })
 </script>
 
 <template>
@@ -147,34 +96,3 @@ import { faL } from '@fortawesome/free-solid-svg-icons';
     </template>
   </AppModal>
 </template>
-
-<style scoped>
-  .slide-in-enter-active {
-    transition: all .3s ease;
-  }
-  .slide-in-leave-active {
-    transition: all .3s ease;
-  }
-  .slide-in-enter, .slide-in-leave-to {
-    transform: translateX(-100%);
-    opacity: 0
-  }
-
-  .slide-in-leave, .slide-in-enter-from {
-    transform: translateX(100%);
-  }
-  .slide-out-enter-active {
-    transition: all .3s ease;
-  }
-  .slide-out-leave-active {
-    transition: all .3s ease;
-  }
-  .slide-out-enter, .slide-out-leave-to {
-    transform: translateX(100%);
-    opacity: 0
-  }
-
-  .slide-out-leave, .slide-out-enter-from {
-    transform: translateX(-100%);
-  }
-</style>

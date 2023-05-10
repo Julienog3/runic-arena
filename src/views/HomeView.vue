@@ -4,13 +4,13 @@ import CardDetails from '@/components/CardDetails.vue';
 import AppSearchBar from '@/components/utils/AppSearchBar.vue';
 import type { CardType } from '@/types/card';
 import { onMounted, ref } from 'vue';
-import AddingModal from '@/components/modals/adding-modal/AddingModal.vue';
+import AddingCardModal from '@/components/modals/adding-modal/AddingCardModal.vue';
 import { getAllCards } from '@/services/card.service';
 
 const cards = ref<CardType[]>([])
 
 const selectedCard = ref<CardType>()
-const isAddingModalOpened = ref<boolean>(false)
+const isAddingCardModalOpened = ref<boolean>(false)
 
 onMounted(async (): Promise<void> => {
   cards.value = await getAllCards()
@@ -19,10 +19,10 @@ onMounted(async (): Promise<void> => {
 </script>
 
 <template>
-  <AddingModal
-    v-show="isAddingModalOpened"
+  <AddingCardModal
+    v-show="isAddingCardModalOpened"
     title="Ajout d'une carte"
-    :close-modal="() => isAddingModalOpened = false"
+    :close-modal="() => isAddingCardModalOpened = false"
   />
   <main class="w-full flex transition-all">
     <div class="flex flex-col gap-2 p-8 w-full">
@@ -33,7 +33,7 @@ onMounted(async (): Promise<void> => {
         </div>
         <div class="flex gap-4">
           <AppSearchBar />
-          <button @click="isAddingModalOpened = true" class="flex gap-2 items-center p-4 text-white bg-neutral-800 font-medium rounded-lg">
+          <button @click="isAddingCardModalOpened = true" class="flex gap-2 items-center p-4 text-white bg-neutral-800 font-medium rounded-lg">
             <font-awesome-icon class=" mr-2" icon="fa-solid fa-plus" />
             Ajouter une carte
           </button>
