@@ -71,9 +71,13 @@ import { useAddingCardModalStore } from '@/stores/addingCardModal';
           :src="props.card.image"
           alt=""
         >
-        <span class="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 w-12 h-12 rounded-full flex items-center justify-center text-orange-500 bg-orange-200 text-lg font-semibold">
-          {{ props.card.value }}
-        </span>
+        <div class="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 w-12 h-12">
+          
+          <span class="absolute z-10 top-0 left-0 w-full h-full rounded-full flex items-center justify-center text-orange-500 bg-orange-200 text-lg font-semibold">
+            {{ props.card.value }}
+          </span>
+          <span class="absolute top-0 left-0 animate-ping inline-flex h-full w-full rounded-full bg-orange-400 opacity-75" />
+        </div>
       </div>
       <div class="flex flex-col gap-4 w-full">
         <div class="flex gap-8">
