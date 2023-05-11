@@ -49,7 +49,7 @@
       <div class="relative max-w-[180px]">
         <img 
           class="rounded-lg"
-          src="@/assets/sample-card.jpg"
+          :src="props.card.image"
           alt=""
         >
         <span class="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 w-12 h-12 rounded-full flex items-center justify-center text-orange-500 bg-orange-200 text-lg font-semibold">
