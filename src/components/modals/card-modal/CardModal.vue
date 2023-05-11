@@ -87,23 +87,6 @@
     return tabs.find(({ id }) => currentTabId.value === id)?.component 
   })
 
-  onMounted(() => {
-    if (props.card) {
-      store.addExistingCard({
-        name: props.card.name,
-        typeId: props.card.typeId,
-        description: props.card.description,
-        value: props.card.value,
-        image: props.card.illustration,
-        classId: props.card.classId,
-        activeSkills: props.card.skills.filter((card) => card.isActive).map((card) => {
-          return card.id
-        }),
-        passiveSkill: props.card.skills.find((card) => !card.isActive)?.id
-      })
-    }
-  })
-
   onUnmounted(() => {
     currentTabId.value = 0
   })
@@ -143,7 +126,7 @@
           @click="nextStep()"
           class="bg-violet-600  font-medium text-white text-md px-12 py-3 rounded-lg"
         >
-          {{ (currentTabId >= tabs.length - 1) ? 'Créer la carte' : 'Suivant'}}
+          {{ (currentTabId >= tabs.length - 1) ? (card) ? 'Modifier la carte' : 'Créer la carte' : 'Suivant'}}
         </button>
       </div>
     </div>
