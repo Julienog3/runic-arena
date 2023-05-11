@@ -55,7 +55,7 @@ import { useAddingCardModalStore } from '@/stores/addingCardModal';
       :close-modal="() => isEditingModalOpened = false"
       :card="card"
     />
-  <aside class="w-4/6 border-l p-8 bg-white">
+  <aside class="w-4/6 border-l p-8 bg-white overflow-y-scroll h-screen">
     <div class="flex justify-between mb-8">
       <h3 class="font-bold text-4xl text-neutral-900">{{ props.card.name }}</h3>
       <div class="flex gap-4">
