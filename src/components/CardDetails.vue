@@ -4,10 +4,11 @@
   import ConfirmationModal from './modals/ConfirmationModal.vue';
   import { ref } from 'vue';
   import CardDetailsSkillList from './CardDetailsSkillList.vue';
-  import type { CardType } from '@/types/card';
+  import { TypeEnum, type CardType } from '@/types/card';
   import { deleteCard } from '@/services/card.service'
   import CardModal from './modals/card-modal/CardModal.vue';
 import { useAddingCardModalStore } from '@/stores/addingCardModal';
+import { ColorEnum } from '@/types/color';
 
   interface CardDetailsProps {
     card: CardType
@@ -36,6 +37,18 @@ import { useAddingCardModalStore } from '@/stores/addingCardModal';
       }),
       passiveSkill: props.card.skills.find((card) => !card.isActive)?.id
     })
+  }
+
+  const getColorByType = (type: TypeEnum): ColorEnum => {
+    if (type === TypeEnum.CHAOS) {
+      return ColorEnum.PURPLE
+    }
+
+    if (type === TypeEnum.HALO) {
+      return ColorEnum.YELLOW
+    }
+
+    return ColorEnum.NEUTRAL
   }
 
   const isDeleteModalOpened = ref<boolean>(false)
@@ -83,7 +96,7 @@ import { useAddingCardModalStore } from '@/stores/addingCardModal';
         <div class="flex gap-8">
           <div class="flex flex-col gap-2">
             <h4 class="text-lg font-semibold text-neutral-500">{{ $t('globals.type') }}</h4>
-            <AppChip color="purple">{{ $t(`card.types.${props.card.type}`) }}</AppChip>
+            <AppChip :color="getColorByType(props.card.type)">{{ $t(`card.types.${props.card.type}`) }}</AppChip>
           </div>
           <div class="flex flex-col gap-2">
             <h4 class="text-lg font-semibold text-neutral-500">{{ $t('globals.category') }}</h4>
