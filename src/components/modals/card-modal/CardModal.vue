@@ -103,7 +103,7 @@
     <template #body>
       <form 
         @submit="$event => submit($event)" 
-        class="relative w-full min-h-[500px]"
+        class="relative w-full min-h-[400px]"
       >
         <Transition :name="transitionType">
           <component :is="currentTab" />

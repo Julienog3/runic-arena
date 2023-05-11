@@ -93,7 +93,7 @@ import { getAllCategories } from '@/services/category.service';
         rows="10"
         v-model="store.card.description"
         placeholder="Ecrivez la description de la carte"
-        class="border border-neutral-200 p-3 rounded-lg focus:border-violet-500"
+        class="border border-neutral-200 p-3 h-32 rounded-lg focus:border-violet-500"
       ></textarea>
     </div>
   </div>    

@@ -34,8 +34,7 @@ onMounted(async () => {
       </div>
       <span @click="store.addActiveSkill()" class="text-violet-500 font-semibold cursor-pointer">+ Ajouter une capacité</span>
       <div class="flex flex-col w-full">
-        <h2 class="text-lg font-semibold text-neutral-800">Capacité passive</h2>
-        <label for="type" class="mb-2">Type</label>
+        <h2 class="text-lg font-semibold text-neutral-800 mb-2">Capacité passive</h2>
         <select 
           type="text" 
           id="type"
