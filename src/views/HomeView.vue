@@ -17,7 +17,7 @@ const searchFilter = ref<string>('')
 onMounted(async (): Promise<void> => {
   cards.value = await getAllCards()
   selectedCard.value = cards.value[0]
-}) 
+})
 
 watch(isAddingCardModalOpened, async () => {
   cards.value = await getAllCards()

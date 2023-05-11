@@ -7,16 +7,35 @@
   import type { CardType } from '@/types/card';
   import { deleteCard } from '@/services/card.service'
   import CardModal from './modals/card-modal/CardModal.vue';
+import { useAddingCardModalStore } from '@/stores/addingCardModal';
 
   interface CardDetailsProps {
     card: CardType
   }
 
   const props = defineProps<CardDetailsProps>()
+  
+  const store = useAddingCardModalStore()
 
   const handleDelete = (): void => {
     deleteCard(props.card.id)
     isDeleteModalOpened.value = false
+  }
+
+  const toggleEditModal = () => {
+    isEditingModalOpened.value = true
+    store.addExistingCard({
+      name: props.card.name,
+      typeId: props.card.typeId,
+      description: props.card.description,
+      value: props.card.value,
+      image: props.card.illustration,
+      classId: props.card.classId,
+      activeSkills: props.card.skills.filter((card) => card.isActive).map((card) => {
+        return card.id
+      }),
+      passiveSkill: props.card.skills.find((card) => !card.isActive)?.id
+    })
   }
 
   const isDeleteModalOpened = ref<boolean>(false)
@@ -40,12 +59,12 @@
     <div class="flex justify-between mb-8">
       <h3 class="font-bold text-4xl text-neutral-900">{{ props.card.name }}</h3>
       <div class="flex gap-4">
-        <AppButton :on-click="() => isEditingModalOpened = true" color="neutral" icon="fa-pen"/>
+        <AppButton :on-click="() => toggleEditModal()" color="neutral" icon="fa-pen"/>
         <AppButton :on-click="() => isDeleteModalOpened = true" color="red" icon="fa-trash"/>
       </div>
     </div>
 
-    <div class="flex gap-8 mb-12">
+    <div class="flex gap-8 mb-8">
       <div class="relative max-w-[180px]">
         <img 
           class="rounded-lg"

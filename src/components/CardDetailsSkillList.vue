@@ -46,16 +46,16 @@ const currentSkills = computed(() => {
 </script>
 
 <template>
-  <div>
-    <ul class="border-b flex gap-4 pb-2 mb-4">
+  <div class="app-skills-list">
+    <ul class="border-b flex gap-4 pb-2 mb-4 ">
       <li @click="selectSkillType(skill.name)" v-for="skill in skillCategories" :key="skill.name" :class="isCategorySelected(skill.name) ? 'relative cursor-pointer text-purple-500' : 'relative cursor-pointer text-neutral-900'">
         {{ skill.label }}
         <span v-if="isCategorySelected(skill.name)" class="absolute bg-purple-500 w-full h-[2px] bottom-0 left-0 translate-y-[9px]"></span>
       </li>
     </ul>
     <Transition :name="transitionName">
-      <ul class="flex flex-col gap-4">
-        <CardDetailsSkillCard 
+      <ul class="flex flex-col h-full gap-4 overflow-y-scroll">
+        <CardDetailsSkillCard
           v-for="skill in currentSkills" 
           :key="skill.name" 
           :skill="skill"
@@ -66,6 +66,9 @@ const currentSkills = computed(() => {
 </template>
 
 <style scoped>
+  .app-skills-list ul::-webkit-scrollbar {
+    display: none;
+  }
   .slide-in-enter-active {
     transition: all .3s ease;
   }
