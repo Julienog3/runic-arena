@@ -1,21 +1,22 @@
 <script setup lang="ts">
+  import ConfirmationModal from '@/components/modals/ConfirmationModal.vue';
   import AppButton from '@/components/utils/AppButton.vue'
-  import { editSkill } from '@/services/skill.service';
-  import { getOneSkill } from '@/services/skill.service';
-  import { deleteSkill } from '@/services/skill.service';
+  import { deleteSkill, getOneSkill, editSkill } from '@/services/skill.service';
   import type { SkillType } from '@/types/skill';
-import { number } from '@intlify/core-base';
   import { onMounted, ref } from 'vue';
   import { useRoute } from 'vue-router';
 
   const skill = ref<SkillType[]>([])
   
-  const isAddingModalOpened = ref<boolean>(false)
-
   const route = useRoute();
   const id = route.params.id;
 
-  const isModalOpened = ref(false)
+  const isModalOpened = ref<boolean>(false)
+
+  const handleDelete = (): void => {
+    deleteSkill(+id)
+    isModalOpened.value = false
+  }
 
   onMounted(async (): Promise<void> => {
     skill.value = await getOneSkill(+id)
@@ -23,10 +24,11 @@ import { number } from '@intlify/core-base';
 </script>
 
 <template>
-  <ConfirmationModal 
+  <ConfirmationModal
     v-show="isModalOpened"
     title="Confirmation de la suppression"
     :close-modal="() => isModalOpened = false"
+    :on-delete="() => handleDelete()"
   />
   <main class="w-full flex">
     <div class="flex flex-col gap-2 p-8 h-screen w-full overflow-y-scroll">
@@ -36,7 +38,7 @@ import { number } from '@intlify/core-base';
           <h2 class="text-xl text-neutral-400 mb-6">Editer une capacité</h2>
         </div>
         <div class="flex gap-4">
-        <AppButton :on-click="() => deleteSkill(+id)" color="red" text="trst" icon="fa-trash"/>
+        <AppButton :on-click="() => isModalOpened = true" color="red" text="trst" icon="fa-trash"/>
       </div>
       </div>
       
