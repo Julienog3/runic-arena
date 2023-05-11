@@ -55,7 +55,7 @@ import { useAddingCardModalStore } from '@/stores/addingCardModal';
       :close-modal="() => isEditingModalOpened = false"
       :card="card"
     />
-  <aside class="w-4/6 border-l p-8 bg-white">
+  <aside class="w-4/6 border-l p-8 bg-white overflow-y-scroll h-screen">
     <div class="flex justify-between mb-8">
       <h3 class="font-bold text-4xl text-neutral-900">{{ props.card.name }}</h3>
       <div class="flex gap-4">
@@ -68,7 +68,7 @@ import { useAddingCardModalStore } from '@/stores/addingCardModal';
       <div class="relative max-w-[180px]">
         <img 
           class="rounded-lg"
-          src="@/assets/sample-card.jpg"
+          :src="props.card.image"
           alt=""
         >
         <span class="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 w-12 h-12 rounded-full flex items-center justify-center text-orange-500 bg-orange-200 text-lg font-semibold">
