@@ -20,16 +20,12 @@ const skill = ref<SkillType>({name: "",})
 
 const store = useAddingCardModalStore()
 
-const props = defineProps<SkillInformationsFormProps>()
+defineProps<SkillInformationsFormProps>()
 // defineEmits<{
 //   (e: 'change', id: number): void
 //   (e: 'update', value: string): void
 // }>()
 const emit = defineEmits(['update:name', 'update:description', 'update:type', 'update:category', 'update:power'])
-
-  // onUpdated(() => {
-  //   console.log('test')
-  // }) 
 
 </script>
 

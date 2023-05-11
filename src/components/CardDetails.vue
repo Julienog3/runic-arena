@@ -6,6 +6,7 @@
   import CardDetailsSkillList from './CardDetailsSkillList.vue';
   import type { CardType } from '@/types/card';
   import { deleteCard } from '@/services/card.service'
+  import CardModal from './modals/card-modal/CardModal.vue';
 
   interface CardDetailsProps {
     card: CardType
@@ -15,25 +16,32 @@
 
   const handleDelete = (): void => {
     deleteCard(props.card.id)
-    isModalOpened.value = false
+    isDeleteModalOpened.value = false
   }
 
-  const isModalOpened = ref(false)
+  const isDeleteModalOpened = ref<boolean>(false)
+  const isEditingModalOpened = ref<boolean>(false)
 </script>
 
 <template>
   <ConfirmationModal 
-    v-show="isModalOpened"
+    v-show="isDeleteModalOpened"
     title="Confirmation de la suppression"
-    :close-modal="() => isModalOpened = false"
+    :close-modal="() => isDeleteModalOpened = false"
     :on-delete="() => handleDelete()"
   />
+  <CardModal
+      v-show="isEditingModalOpened"
+      title="Modification d'une carte"
+      :close-modal="() => isEditingModalOpened = false"
+      :card="card"
+    />
   <aside class="w-4/6 border-l p-8 bg-white">
     <div class="flex justify-between mb-8">
       <h3 class="font-bold text-4xl text-neutral-900">{{ props.card.name }}</h3>
       <div class="flex gap-4">
-        <AppButton :on-click="() => isModalOpened = true" color="neutral" icon="fa-pen"/>
-        <AppButton :on-click="() => isModalOpened = true" color="red" icon="fa-trash"/>
+        <AppButton :on-click="() => isEditingModalOpened = true" color="neutral" icon="fa-pen"/>
+        <AppButton :on-click="() => isDeleteModalOpened = true" color="red" icon="fa-trash"/>
       </div>
     </div>
 

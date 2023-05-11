@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import { computed, type Component, ref, onUnmounted, reactive, toRaw } from 'vue';
+  import { computed, type Component, ref, onUnmounted, reactive, toRaw, onMounted } from 'vue';
   import AppModal from '@/components/modals/AppModal.vue';
   import AddingForm from '@/components/forms/card/CardInformationsForm.vue'
   import PaginationModal from '@/components/modals/PaginationModal.vue';
@@ -7,11 +7,13 @@
   import SkillsForm from '@/components/forms/card/CardSkillsForm.vue';
   import { TransitionNameEnum } from '@/types/transition';
   import { useAddingCardModalStore } from '@/stores/addingCardModal'
-  import { createCard } from '@/services/card.service'
+  import { editCard, createCard } from '@/services/card.service'
+  import type { CardType } from '@/types/card';
 
   interface AddingModalProps {
     title: string
     closeModal: () => void
+    card?: CardType
   }
 
   type AddingModalTabType = {
@@ -50,10 +52,17 @@
     transitionType.value = TransitionNameEnum.SLIDE_IN
     
     if (currentTabId.value >= tabs.length - 1) {
-      await createCard(store.card).then(() => {
-        props.closeModal()
-        store.$reset()
-      })
+      if (props.card) {
+        await editCard(props.card.id, store.card).then(() => {
+          props.closeModal()
+          store.$reset()
+        })
+      } else {
+        await createCard(store.card).then(() => {
+          props.closeModal()
+          store.$reset()
+        })
+      }
     } else {
       currentTabId.value += 1
     }
@@ -76,6 +85,23 @@
 
   const currentTab = computed(() => {
     return tabs.find(({ id }) => currentTabId.value === id)?.component 
+  })
+
+  onMounted(() => {
+    if (props.card) {
+      store.addExistingCard({
+        name: props.card.name,
+        typeId: props.card.typeId,
+        description: props.card.description,
+        value: props.card.value,
+        image: props.card.illustration,
+        classId: props.card.classId,
+        activeSkills: props.card.skills.filter((card) => card.isActive).map((card) => {
+          return card.id
+        }),
+        passiveSkill: props.card.skills.find((card) => !card.isActive)?.id
+      })
+    }
   })
 
   onUnmounted(() => {

@@ -67,3 +67,41 @@ export const createCard = async (card: CardPayloadType) => {
     })
   })
 }
+
+export const editCard = async (id: number, card: CardPayloadType) => {
+  const skillsPayload = [...card.activeSkills, card.passiveSkill].map((skill) => {
+    return {
+      id: skill
+    }
+  })
+
+  await fetch(`${API_ENDPOINT}/cards/${id}`, {
+    method: 'PUT',
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      name: card.name,
+      description: card.description,
+      image: card.image,
+      type:  {
+        connect: {
+          id: card.typeId
+        }
+      },
+      class: {
+        connect: {
+          id: card.classId
+        }
+      },
+      value: card.value,
+      skills: {
+        connect: skillsPayload
+      }
+    })
+  })
+}
+
+export const generateName = async () => {
+  const response = await fetch(`${API_ENDPOINT}/generatename`)
+    .then((res) => res.text())
+  return response
+} 

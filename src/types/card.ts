@@ -17,7 +17,7 @@ export type CardType = {
   id: number
   name: string
   description?: string
-  power: number
+  value: number
   illustration: string
   typeId: number
   classId: number

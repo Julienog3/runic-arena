@@ -18,6 +18,10 @@ export const useAddingCardModalStore = defineStore('card', () => {
     card.value.activeSkills.push(0)
   }
 
+  function addExistingCard(existingCard: CardPayloadType) {
+    card.value = existingCard
+  }
+
   function $reset() {
     card.value = {
       name: "",
@@ -31,5 +35,5 @@ export const useAddingCardModalStore = defineStore('card', () => {
     }
   }
 
-  return { card, $reset, addActiveSkill }
+  return { card, $reset, addActiveSkill, addExistingCard }
 })

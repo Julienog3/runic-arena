@@ -4,7 +4,7 @@ import CardDetails from '@/components/CardDetails.vue';
 import AppSearchBar from '@/components/utils/AppSearchBar.vue';
 import type { CardType } from '@/types/card';
 import { computed, onMounted, onUpdated, ref, watch } from 'vue';
-import AddingCardModal from '@/components/modals/adding-modal/AddingCardModal.vue';
+import CardModal from '@/components/modals/card-modal/CardModal.vue';
 import { getAllCards } from '@/services/card.service';
 
 const cards = ref<CardType[]>([])
@@ -33,7 +33,7 @@ const filteredCards = computed(() => {
 </script>
 
 <template>
-  <AddingCardModal
+  <CardModal
     v-show="isAddingCardModalOpened"
     title="Ajout d'une carte"
     :close-modal="() => isAddingCardModalOpened = false"

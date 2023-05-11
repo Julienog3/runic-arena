@@ -6,7 +6,7 @@ import { createI18n } from 'vue-i18n'
 // import * as dotenv from 'dotenv'
 // dotenv.config()
 
-import { faHouse, faPlus, faGear, faPen, faTrash, faXmark, faPeopleGroup, faFire, faDragon } from '@fortawesome/free-solid-svg-icons'
+import { faHouse, faPlus, faGear, faPen, faTrash, faXmark, faPeopleGroup, faFire, faDragon, faShuffle } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 import App from './App.vue'
@@ -25,6 +25,7 @@ library.add(faXmark)
 library.add(faPeopleGroup)
 library.add(faFire)
 library.add(faDragon)
+library.add(faShuffle)
 
 const i18n = createI18n({
   locale: 'fr',

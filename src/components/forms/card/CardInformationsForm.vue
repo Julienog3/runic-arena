@@ -1,5 +1,6 @@
 <script setup lang="ts">
-  import { getAllCategories } from '@/services/category.service';
+  import { generateName } from '@/services/card.service';
+import { getAllCategories } from '@/services/category.service';
   import { getAllTypes } from '@/services/type.service';
   import { useAddingCardModalStore } from '@/stores/addingCardModal';
   import { onMounted, ref } from 'vue';
@@ -19,6 +20,12 @@
     categories.value = await getAllCategories()
   })
 
+  const generateCardName = async () => {
+    const newName = await generateName()
+    store.$patch(({ card }) => {
+      card.name = newName
+    })
+  }
 </script>
 
 <template>
@@ -33,8 +40,12 @@
         id="name"
         v-model="store.card.name"
         placeholder="Nom de la carte"
-        class="border border-neutral-200 p-3 rounded-lg focus:border-violet-500 focus-within:border-violet-500 focus-visible:border-violet-500"
+        class="border border-neutral-200 mb-2 p-3 rounded-lg focus:border-violet-500 focus-within:border-violet-500 focus-visible:border-violet-500"
       />
+      <span @click="generateCardName()" class="flex gap-2 items-center text-violet-500 font-medium cursor-pointer">
+        <font-awesome-icon icon="fa-solid fa-shuffle" />
+        Générer un nom
+      </span>
     </div>
     <div class="flex flex-col w-full">
       <label for="type" class="mb-2">Type</label>

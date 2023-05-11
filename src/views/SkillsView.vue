@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import AddingSkillModal from '@/components/modals/adding-modal/AddingSkillModal.vue';
+  import SkillModal from '@/components/modals/skill-modal/SkillModal.vue';
   import SkillCard from '@/components/skill-view/SkillCard.vue';
   import { getAllSkills } from '@/services/skill.service';
   import type { SkillType } from '@/types/skill';
@@ -16,7 +16,7 @@
 </script>
 
 <template>
-  <AddingSkillModal
+  <SkillModal
     v-show="isAddingSkillModalOpened"
     title="Ajout d'une capacité"
     :close-modal="() => isAddingSkillModalOpened = false"
